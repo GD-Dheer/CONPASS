@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import TheMap from '../map';
@@ -7,8 +8,11 @@ import SwitchCampuses from '../switchCampuses';
 import SetPath from '../setPath';
 import Addresses from '../addresses';
 import Building from '../map/building/index';
-import generateBuilding from '../../assets/svgReactNative/buildingRepository';
+import generateBuilding from '../indoorPlans/buildingRepository';
+import generateGraph from '../../indoor_directions_modules/graphRepository';
+import hall8FloorPlanCoordinates from '../../indoor_directions_modules/buildings/H/Hall8FloorPlanCoordinates'; // Until graph repository is implemented.
 import styles from './styles';
+import Suggestions from '../suggestions';
 
 
 class Home extends Component {
@@ -32,18 +36,11 @@ class Home extends Component {
       },
       interiorMode: false,
       nearbyMarkers: [],
-      isVisible: false,
-      // eslint-disable-next-line react/no-unused-state
-      isSearchVisible: true,
-      isGoVisible: false,
-      isSwitchAvailableIndestination: true,
-
-      // current Concordia a user is in
+      // current concordia bulding tapped on
       currentBuildingAddress: '',
-
       showDirectionsMenu: false,
       showCampusToggle: false,
-
+      showSuggestionsList: false
     };
     this.interiorModeOn = this.interiorModeOn.bind(this);
     this.interiorModeOff = this.interiorModeOff.bind(this);
@@ -162,6 +159,7 @@ class Home extends Component {
    *    }]
    *
    */
+
   getNearbyMarkers=(markers) => {
     this.setState({ nearbyMarkers: markers });
   }
@@ -171,6 +169,27 @@ class Home extends Component {
       currentBuildingAddress: childCurrentBuilding
     });
   };
+
+  /**
+   * gets the curretly tapped on building information from 'map' component
+   * @param {object} suggestion - New coordinates to be passed.
+   */
+  getSuggestions = (suggestion) => {
+    this.setState({
+      suggestion,
+      showSuggestionsList: true
+    });
+  }
+
+  /**
+   * sets the visibility of showing the building information
+   * @param {object} suggestion - New coordinates to be passed.
+   */
+  setSuggestionVisibility = () => {
+    this.setState({
+      showSuggestionsList: false
+    });
+  }
 
   /**
    *
@@ -211,6 +230,7 @@ class Home extends Component {
           getDestinationIfSet={this.getDestinationIfSet}
           updateRegionCloser={this.updateRegionCloser}
           nearbyMarkers={this.state.nearbyMarkers}
+          getSuggestions={this.getSuggestions}
         />
         {!this.state.showDirectionsMenu && (
         <SearchBar
@@ -254,12 +274,19 @@ class Home extends Component {
         <Building
           building={this.state.building}
           buildingFloorPlans={generateBuilding(this.state.building.building)}
+          adjacencyGraphs={generateGraph(this.state.building.building)}
           interiorModeOff={this.interiorModeOff}
+        />
+        )}
+        {this.state.showSuggestionsList && this.state.interiorMode && (
+        <Suggestions
+          changeSuggestionVisibility={this.setSuggestionVisibility}
+          getDirections={this.setDirections}
+          suggestion={this.state.suggestion}
         />
         )}
       </View>
     );
   }
 }
-
 export default Home;
