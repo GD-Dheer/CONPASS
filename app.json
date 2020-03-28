@@ -26,6 +26,15 @@
     "ios": {
       "supportsTablet": true
     },
+    "android": {
+      "package": "com.concordia.CONPASS",
+      "versionCode": 1,
+      "config": {
+        "googleMaps":{
+          "apiKey": "AIzaSyAo_3rxwjyJFOCYmUnUpR4SJzxwXTzwitQ"
+        }
+      }
+    },
     "description": "",
     "packagerOpts": {
       "config": "metro.config.js",
@@ -42,6 +51,9 @@
         "wasm",
         "svg"
       ]
-    }
-  }
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "conPass",
+  "name": "conPass"
 }
