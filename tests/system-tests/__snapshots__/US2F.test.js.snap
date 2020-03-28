@@ -9,7 +9,7 @@ exports[`SearchBar component should render correctly in "debug" mode 1`] = `
       "position": "absolute",
       "top": 25,
       "width": "90%",
-      "zIndex": 201,
+      "zIndex": 300,
     }
   }
 >
