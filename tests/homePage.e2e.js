@@ -32,7 +32,7 @@ test('searchBar component is the searched element still in searchbar after map v
   expect(answer).toBe(true);
 });
 
-test('appium has location button', async () => {
+test('location button is present', async () => {
   el2 = await driver.elementsByXPath('/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageView');
   expect(el2).toBeDefined();
 });
