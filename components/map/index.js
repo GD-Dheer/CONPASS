@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
 import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
+import { connect } from 'react-redux';
 import buildings from '../../assets/polygons/polygons';
 import CustomPolygon from './customPolygon';
 import styles from './styles';
 
 let region = '';
 
-export default class TheMap extends Component {
+class TheMap extends Component {
   /**
    * Represents a map.
    * @constructor
@@ -37,6 +38,12 @@ export default class TheMap extends Component {
     if (prevProps.updatedCoordinates !== coordinates) {
       this.fitScreenToPath(coordinates);
     }
+    const { redux_env_mode } = this.props;
+
+    if (prevProps.redux_env_mode !== redux_env_mode) {
+      const { building } = this.props;
+      this.focusOnBuilding(building);
+    }
   }
 
   /**
@@ -63,6 +70,7 @@ export default class TheMap extends Component {
    * focuses on building on map when user taps it's coordinates on the map
    */
   focusOnBuilding(building) {
+    console.log('trig yo bitch');
     const { coordinates } = building.polygon;
     this.state.mapRef.fitToCoordinates(coordinates, {
       edgePadding: {
@@ -189,3 +197,13 @@ export default class TheMap extends Component {
     );
   }
 }
+
+// get redux store state
+const mapStateToProps = (state) => {
+  return {
+    redux_env_mode: state.redux_env_mode,
+    building: state.building
+  };
+};
+
+export default connect(mapStateToProps)(TheMap);

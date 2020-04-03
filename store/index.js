@@ -1,14 +1,22 @@
 import { createStore } from 'redux';
+import { GO_INT, GO_EXT } from './actionTypes';
 
 // initial store state
 const initialState = {
-  language: 'en'
+  redux_env_mode: 'ext',
+  building: {},
 };
 
-// Redux Reducer1, this receives actions that are being DISPATCHED
-// Remove eslint comment below when adding action to the reducer.
-// eslint-disable-next-line no-unused-vars
+// Redux Reducer, this receives actions that are being DISPATCHED
 const reducer = (state = initialState, action) => {
+  console.log('store trig');
+  if (action.type === GO_INT) {
+    return {
+      ...state,
+      redux_env_mode: 'int',
+      building: action.building,
+    };
+  }
   return state;
 };
 

@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 import TheMap from '../map';
 import SearchBar from '../searchBar';
 import Location from '../location';
@@ -13,6 +14,8 @@ import generateGraph from '../../indoor_directions_modules/graphRepository';
 import hall8FloorPlanCoordinates from '../../indoor_directions_modules/buildings/H/Hall8FloorPlanCoordinates'; // Until graph repository is implemented.
 import styles from './styles';
 import Suggestions from '../suggestions';
+import { goIntMode } from '../../store/actions';
+import buildings from '../../assets/polygons/polygons';
 
 
 class Home extends Component {
@@ -44,6 +47,12 @@ class Home extends Component {
     };
     this.interiorModeOn = this.interiorModeOn.bind(this);
     this.interiorModeOff = this.interiorModeOff.bind(this);
+    
+
+    setTimeout(() => {
+      this.initiateNavigation();
+        }, 5000);
+    
   }
 
 
@@ -217,6 +226,19 @@ class Home extends Component {
     });
   }
 
+  /**
+   * to start from a building to the next, we need to start from one floor
+   *
+   * 1. building, exterior, building
+   */
+  initiateNavigation() {
+    console.log('fnc call');
+    // vanier library
+    const building = buildings[0];
+    // dispatch to redux store
+    this.props.goIntMode(building);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -289,4 +311,17 @@ class Home extends Component {
     );
   }
 }
-export default Home;
+
+// const mapStateToProps = (state)=>{
+//   return{
+//       redux_env_mode: state.redux_env_mode,
+//   }
+// }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    goIntMode: (building) => { dispatch(goIntMode(building)); }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Home);

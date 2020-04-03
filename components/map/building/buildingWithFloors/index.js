@@ -118,7 +118,7 @@ class BuildingWithFloors extends Component {
           <TouchableOpacity
             onPress={
                 () => {
-                  this.dijkstraHandler('817', '967');
+                  this.dijkstraHandler('admin', 'female_bathroom');
                 }
               }
           >
