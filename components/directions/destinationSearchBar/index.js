@@ -38,7 +38,6 @@ export default class DestinationSearchBar extends Component {
     }
 
     if (this.props.directionsId) {
-      console.log(this.props.directionsId);
       this.getLatLong(this.props.directionsId);
     }
   }
@@ -102,7 +101,7 @@ export default class DestinationSearchBar extends Component {
     this.drawPath();
   }
 
-
+  // this should not be there
   async drawPath() {
     try {
       await this.getCurrentLocation();

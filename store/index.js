@@ -14,9 +14,17 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       redux_env_mode: 'int',
-      building: action.building,
+      itinerary: action.itinerary,
     };
   }
+
+  if (action.type === GO_EXT) {
+    return {
+      ...state,
+      redux_env_mode: 'ext'
+    };
+  }
+  
   return state;
 };
 

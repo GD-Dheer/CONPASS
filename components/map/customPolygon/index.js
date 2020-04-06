@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { Polygon } from 'react-native-maps';
+import { connect } from 'react-redux';
 
 class CustomPolygon extends Component {
   /**
    * function focuses on building when selected on map
    */
   zoomBuilding() {
-    const { building } = this.props;
+    const { building, itinerary } = this.props;
+    
+    if(building.building ===itinerary.buildingEnd.building) {
+      console.log('right building end');
+    }
     this.props.focusOnBuilding(building);
   }
 
@@ -26,4 +31,12 @@ class CustomPolygon extends Component {
   }
 }
 
-export default CustomPolygon;
+const mapStateToProps = (state) => {
+  return {
+    itinerary: state.itinerary
+  };
+};
+
+
+
+export default connect(mapStateToProps)(CustomPolygon);

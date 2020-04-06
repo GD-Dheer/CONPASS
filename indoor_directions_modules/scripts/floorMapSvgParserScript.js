@@ -440,7 +440,7 @@ const parseFloorMapSvgs = () => {
     }
   };
 
-  console.log(parsedSvgObjectsMap.VL[2]);
+  // console.log(parsedSvgObjectsMap.VL[2]);
 };
 
 parseFloorMapSvgs();

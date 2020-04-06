@@ -5,8 +5,6 @@ import CurrentLocation from '../currentLocation';
 import Destination from '../destination';
 import buildingLogo from '../../../assets/icons/building.png';
 import quit from '../../../assets/icons/quit.png';
-import MapSearchBar from '../../mapSearchBar';
-import DestinationSearchBar from '../destinationSearchBar';
 import BuildingView from '../../buildings/buildingView/index';
 import generateFloorPlan from '../../buildings/floorPlans/floorPlanRepository';
 import generateGraph from '../../../indoor_directions_modules/graphRepository';

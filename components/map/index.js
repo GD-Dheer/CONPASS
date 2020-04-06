@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import { View, Image } from 'react-native';
 import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -19,6 +20,9 @@ class TheMap extends Component {
     this.focusOnBuilding = this.focusOnBuilding.bind(this);
     this.onRegionChange = this.onRegionChange.bind(this);
     this.selectPoi = this.selectPoi.bind(this);
+    this.state = {
+      polylineVisibility: this.props.polylineVisibility
+    };
   }
 
   /**
@@ -34,16 +38,23 @@ class TheMap extends Component {
    * Updates view when change detected in props
    */
   componentDidUpdate(prevProps) {
-    const coordinates = this.props.updatedCoordinates;
-    if (prevProps.updatedCoordinates !== coordinates) {
-      this.fitScreenToPath(coordinates);
-    }
-    const { redux_env_mode } = this.props;
+    const { redux_env_mode, itinerary, polylineVisibility } = this.props;
+
 
     if (prevProps.redux_env_mode !== redux_env_mode) {
-      const { building } = this.props;
-      this.focusOnBuilding(building);
+      if (redux_env_mode === 'int') {
+        this.focusOnBuilding(itinerary.buildingStart);
+      }
     }
+
+    if (prevProps.polylineVisibility !== polylineVisibility) {
+      this.setState({ polylineVisibility });
+    }
+
+    // const coordinates = this.props.updatedCoordinates;
+    // if (prevProps.updatedCoordinates !== coordinates) {
+    //   this.fitScreenToPath(coordinates);
+    // }
   }
 
   /**
@@ -70,7 +81,6 @@ class TheMap extends Component {
    * focuses on building on map when user taps it's coordinates on the map
    */
   focusOnBuilding(building) {
-    console.log('trig yo bitch');
     const { coordinates } = building.polygon;
     this.state.mapRef.fitToCoordinates(coordinates, {
       edgePadding: {
@@ -126,6 +136,7 @@ class TheMap extends Component {
 
   // do not put conponents that dont belong to react-native-maps API inside the MapView
   render() {
+    const {polylineVisibility} = this.state;
     const buildingFocus = buildings.map((building) => {
       return (
         <CustomPolygon
@@ -152,7 +163,7 @@ class TheMap extends Component {
           style={styles.mapStyle}
           onPoiClick={this.selectPoi}
         >
-          {this.props.polylineVisibility && (
+          {polylineVisibility && (
           <Polyline
             coordinates={this.props.updatedCoordinates ? this.props.updatedCoordinates : []}
             strokeWidth={4}
@@ -202,7 +213,7 @@ class TheMap extends Component {
 const mapStateToProps = (state) => {
   return {
     redux_env_mode: state.redux_env_mode,
-    building: state.building
+    itinerary: state.itinerary
   };
 };
 

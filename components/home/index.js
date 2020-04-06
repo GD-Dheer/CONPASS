@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
+import decodePolyline from 'decode-google-map-polyline';
 import TheMap from '../map';
 import MapSearchBar from '../mapSearchBar';
 import Location from '../location';
@@ -11,9 +12,8 @@ import OutdoorDirections from '../directions/outdoorDirections';
 import IndoorDirections from '../directions/indoorDirections';
 import styles from './styles';
 import Suggestions from '../suggestions';
-import { goIntMode } from '../../store/actions';
+import { goIntMode, goExtMode } from '../../store/actions';
 import buildings from '../../assets/polygons/polygons';
-
 
 class Home extends Component {
   constructor(props) {
@@ -241,20 +241,76 @@ class Home extends Component {
     this.setState({
       interiorMode: false,
       building: null
-    });
+    }, () => { this.props.goExtMode(); });
   }
 
-  initiateNavigation() {
-    console.log('fnc call');
-    // vanier library
-    const building = buildings[0];
 
-    // dispatch to redux store
-    this.props.goIntMode(building);
-    this.updateCoordinates({
-      latitude: building.latitude,
-      longitude: building.longitude
+  async initiateNavigation() {
+    // vanier library
+    const buildingStart = buildings.find((building) => {
+      return building.building === 'VL';
     });
+
+    // hall builiding
+    const buildingEnd = buildings.find((building) => {
+      return building.building === 'H';
+    });
+
+    const startExtCoordinates = {
+      latitude: buildingStart.latitude,
+      longitude: buildingStart.longitude
+    };
+
+    const endExtCoordinates = {
+      latitude: buildingEnd.latitude,
+      longitude: buildingEnd.longitude
+    };
+
+    // dispatch
+
+    const mode = 'walking';
+    const waypoints = await this.getWaypoints(startExtCoordinates.latitude, startExtCoordinates.longitude, endExtCoordinates.latitude, endExtCoordinates.longitude, mode);
+    const focusRegion = {
+      latitude: startExtCoordinates.latitude,
+      longitude: startExtCoordinates.longitude,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01
+    };
+    this.setState(
+      {
+        showDirectionsMenu: true,
+        presetRegion: focusRegion,
+        coordinates: waypoints,
+      },
+      () => { return this.props.goIntMode({ buildingStart, buildingEnd }); }
+    );
+  }
+
+  // eslint-disable-next-line react/sort-comp
+  async getWaypoints(originLat, originLong, destinationLat, destinationLong, mode) {
+    let waypoints;
+    try {
+      const key = 'AIzaSyBsMjuj6q76Vcna8G5z9PDyTH2z16fNPDk';
+      const directionUrl = `https://maps.googleapis.com/maps/api/directions/json?key=${key}&origin=${originLat},${originLong}&destination=${destinationLat},${destinationLong}&mode=${mode}`;
+      const result = await fetch(directionUrl);
+      const json = await result.json();
+      // eslint-disable-next-line camelcase
+      const encryptedPath = json.routes[0]?.overview_polyline.points;
+      if (encryptedPath) {
+        const rawPolylinePoints = decodePolyline(encryptedPath);
+        // Incompatible field names for direct decode. Need to do a trivial conversion.
+        waypoints = rawPolylinePoints.map((point) => {
+          return {
+            latitude: point.lat,
+            longitude: point.lng
+          };
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    return waypoints;
   }
 
   render() {
@@ -336,7 +392,8 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    goIntMode: (building) => { dispatch(goIntMode(building)); }
+    goIntMode: (itinerary) => { dispatch(goIntMode(itinerary)); },
+    goExtMode: () => { dispatch(goExtMode()); }
   };
 };
 
