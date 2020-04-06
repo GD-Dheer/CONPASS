@@ -8,7 +8,7 @@
     "lint": "eslint *.js **/*.js",
     "lint:fix": "eslint *.js **/*.js --fix",
     "test": "jest",
-    "test:e2e": "jest --testMatch=\"**/tests/**/*e2e.js\"",
+    "test:e2e": "jest --testMatch=\"**/tests/**/*homePage.e2e.js\"",
     "postinstall": "jetify"
   },
   "jest": {
@@ -22,7 +22,7 @@
     "@react-native-community/masked-view": "0.1.5",
     "@react-navigation/native": "^5.0.8",
     "@react-navigation/stack": "^5.1.0",
-    "appium": "^1.17.0",
+    "appium": "^1.17.0-beta.1",
     "appium-doctor": "^1.15.0",
     "decode-google-map-polyline": "^1.0.1",
     "enzyme": "^3.11.0",
