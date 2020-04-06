@@ -47,14 +47,36 @@ class Home extends Component {
     };
     this.interiorModeOn = this.interiorModeOn.bind(this);
     this.interiorModeOff = this.interiorModeOff.bind(this);
-    
-
-    setTimeout(() => {
-      this.initiateNavigation();
-        }, 5000);
-    
   }
 
+
+  /**
+   * to start from a building to the next, we need to start from one floor
+   * c is class b is poi
+   *
+   * C to C
+   * C to B
+   * B to C
+   * B to B
+   *
+   *
+   *
+   */
+  componentDidMount() {
+    const itinirary = {
+      start: {
+        type: 'class',
+        floor: '1'
+      },
+      end: {
+        type: 'poi',
+        coordinates: ''
+      }
+    };
+    setTimeout(() => {
+      this.initiateNavigation(itinirary);
+    }, 2000);
+  }
 
   /**
    * updates region and passes the new region 'map' component.
@@ -156,7 +178,7 @@ class Home extends Component {
   /**
    * gets marker objects created from the SearchBar component to nearbyMarker state.
    * Also being passed to the Map component
-   * @param {object} markers - pins of nearby locations.
+   * @param {object} markers - pins of nearby locations.x`
    *      markers [{
    *        id: string,
    *        title: string,
@@ -168,7 +190,6 @@ class Home extends Component {
    *    }]
    *
    */
-
   getNearbyMarkers=(markers) => {
     this.setState({ nearbyMarkers: markers });
   }
@@ -226,17 +247,17 @@ class Home extends Component {
     });
   }
 
-  /**
-   * to start from a building to the next, we need to start from one floor
-   *
-   * 1. building, exterior, building
-   */
   initiateNavigation() {
     console.log('fnc call');
     // vanier library
     const building = buildings[0];
+
     // dispatch to redux store
     this.props.goIntMode(building);
+    this.updateCoordinates({
+      latitude: building.latitude,
+      longitude: building.longitude
+    });
   }
 
   render() {
