@@ -48,7 +48,7 @@ class TheMap extends Component {
     }
 
     if (prevProps.polylineVisibility !== polylineVisibility) {
-      this.setState({ polylineVisibility });
+        this.setState({ polylineVisibility });
     }
 
     // const coordinates = this.props.updatedCoordinates;

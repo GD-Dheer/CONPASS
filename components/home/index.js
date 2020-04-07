@@ -244,8 +244,10 @@ class Home extends Component {
     }, () => { this.props.goExtMode(); });
   }
 
-
+  // this function will accept start and end locations.
+  // right now it has hardcoded values
   async initiateNavigation() {
+    
     // vanier library
     const buildingStart = buildings.find((building) => {
       return building.building === 'VL';
@@ -266,8 +268,6 @@ class Home extends Component {
       longitude: buildingEnd.longitude
     };
 
-    // dispatch
-
     const mode = 'walking';
     const waypoints = await this.getWaypoints(startExtCoordinates.latitude, startExtCoordinates.longitude, endExtCoordinates.latitude, endExtCoordinates.longitude, mode);
     const focusRegion = {
@@ -276,13 +276,19 @@ class Home extends Component {
       latitudeDelta: 0.01,
       longitudeDelta: 0.01
     };
+
+    const itinerary = {
+      buildingStart, buildingEnd
+    };
+
+    //prepare UI
     this.setState(
       {
         showDirectionsMenu: true,
         presetRegion: focusRegion,
         coordinates: waypoints,
       },
-      () => { return this.props.goIntMode({ buildingStart, buildingEnd }); }
+      () => { return this.props.goIntMode(itinerary); } // dispatch to redux
     );
   }
 
@@ -383,12 +389,6 @@ class Home extends Component {
     );
   }
 }
-
-// const mapStateToProps = (state)=>{
-//   return{
-//       redux_env_mode: state.redux_env_mode,
-//   }
-// }
 
 const mapDispatchToProps = (dispatch) => {
   return {

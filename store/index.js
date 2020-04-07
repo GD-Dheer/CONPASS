@@ -11,6 +11,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   console.log('store trig');
   if (action.type === GO_INT) {
+    // handle logic here if its a building with class or a simple POI
     return {
       ...state,
       redux_env_mode: 'int',
@@ -24,7 +25,6 @@ const reducer = (state = initialState, action) => {
       redux_env_mode: 'ext'
     };
   }
-  
   return state;
 };
 
