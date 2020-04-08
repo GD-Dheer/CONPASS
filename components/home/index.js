@@ -244,19 +244,51 @@ class Home extends Component {
     }, () => { this.props.goExtMode(); });
   }
 
-  // this function will accept start and end locations.
-  // right now it has hardcoded values
+  /**
+   * use cases:
+   * start outside:
+   *
+   */
   async initiateNavigation() {
-    
-    // vanier library
-    const buildingStart = buildings.find((building) => {
+    const vanier = buildings.find((building) => {
       return building.building === 'VL';
     });
 
-    // hall builiding
-    const buildingEnd = buildings.find((building) => {
+    const hall = buildings.find((building) => {
       return building.building === 'H';
     });
+
+    // play with these
+
+    const poiStart = {
+      type: 'POI',
+      address: 'Saint-Catherine, place Start',
+      coordinates: {
+        latitude: 45.527885,
+        longitude: -73.547471,
+      }
+    };
+
+    const poiEnd = {
+      type: 'POI',
+      address: 'Saint-Dominique, POI end',
+      coordinates: {
+        latitude: 45.526541,
+        longitude: -73.598324,
+      },
+    };
+
+    const buildingStart = {
+      type: 'BUILDING',
+      building: vanier,
+      node: 'VL 201',
+    };
+
+    const buildingEnd = {
+      type: 'BUILDING',
+      building: hall,
+      node: 'H 201',
+    };
 
     const startExtCoordinates = {
       latitude: buildingStart.latitude,
@@ -270,6 +302,7 @@ class Home extends Component {
 
     const mode = 'walking';
     const waypoints = await this.getWaypoints(startExtCoordinates.latitude, startExtCoordinates.longitude, endExtCoordinates.latitude, endExtCoordinates.longitude, mode);
+
     const focusRegion = {
       latitude: startExtCoordinates.latitude,
       longitude: startExtCoordinates.longitude,
@@ -277,11 +310,18 @@ class Home extends Component {
       longitudeDelta: 0.01
     };
 
-    const itinerary = {
-      buildingStart, buildingEnd
-    };
+    // based on state, trig interior or exterior
+    
+    // interior mode
+    // const itinerary = {buildingStart, buildingEnd}
+    // const itinerary ={buildingStart, poiEnd}
 
-    //prepare UI
+    // exteriorMode
+    // const itinerary = {buildingStart, buildingEnd}
+    // const itinerary = {buildingStart, poiEnd};
+    // const itinerary = {poiStart, buildingEnd};
+
+    // prepare UI
     this.setState(
       {
         showDirectionsMenu: true,
