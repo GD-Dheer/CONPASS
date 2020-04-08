@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
+/* eslint-disable max-len */
+/* eslint-disable radix */
+import React, { Component, useState } from 'react';
 import {
-  View, Text, ScrollView, SectionList
+  View, Text, ScrollView, SectionList, RefreshControl
 } from 'react-native';
 
 import {
-  Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Tabs, Tab
+  ListItem, Body, Tabs, Tab
 } from 'native-base';
+import useForceUpdate from 'use-force-update';
 import shuttleScheduleInformation from './shuttleScheduleService';
 import styles from './styles';
 
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+function wait(timeout) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+}
 export default class ShuttleSchedule extends Component {
   render() {
     return (
@@ -28,7 +36,16 @@ export default class ShuttleSchedule extends Component {
   }
 }
 
+
 const Schedule = (props) => {
+  const forceUpdate = useForceUpdate();
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    forceUpdate();
+    wait(2000).then(() => { return setRefreshing(false); });
+  }, [refreshing]);
+
   /** The function will return the appropriate schedule.
    * Button index is as follows: 0 -> SGW and 1->LOY
    * @param {Number} selectedButtonIndex - index of the button, either 0 or 1
@@ -51,6 +68,7 @@ const Schedule = (props) => {
     }
     return ['N/A'];
   }
+
   return (
     <View>
       <ScrollView
@@ -59,8 +77,14 @@ const Schedule = (props) => {
           flexGrow: 1,
           width: '100%',
         }}
+        refreshControl={(
+          <RefreshControl
+            // refresh control used for the Pull to Refresh
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        )}
       >
-
         <SectionList
           sections={[
             {
@@ -76,7 +100,6 @@ const Schedule = (props) => {
             const hourRemaining = Math.abs(parseInt(today.getHours()) - parseInt(item.split(':')[0]));
             const minuiteRemaining = Math.abs(parseInt(today.getMinutes()) - parseInt(item.split(':')[1]));
             const timeRemaining = `${hourRemaining} Hours and ${minuiteRemaining} Minuites ${passOrRemain}`;
-
             return (
               <ListItem>
                 <Body>
