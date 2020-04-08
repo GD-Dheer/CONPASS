@@ -27,8 +27,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-
     backgroundColor: '#e9f1f5',
+  },
+  remaining: {
+    textAlign: 'center',
   },
   item: {
     width: '100%',

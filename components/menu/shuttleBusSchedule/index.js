@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import {
-  Tab, Tabs, ListItem
+  Container, Header, Content, List, ListItem, Left, Body, Right, Thumbnail, Tabs, Tab
 } from 'native-base';
 import shuttleScheduleInformation from './shuttleScheduleService';
 import styles from './styles';
@@ -29,7 +29,6 @@ export default class ShuttleSchedule extends Component {
 }
 
 const Schedule = (props) => {
-  console.log(props);
   /** The function will return the appropriate schedule.
    * Button index is as follows: 0 -> SGW and 1->LOY
    * @param {Number} selectedButtonIndex - index of the button, either 0 or 1
@@ -70,7 +69,21 @@ const Schedule = (props) => {
               data: getShuttleCampusInformation(props.selectedButtonIndex)
             },
           ]}
-          renderItem={({ item }) => { return <ListItem><Text style={styles.item}>{item}</Text></ListItem>; }}
+          renderItem={({ item }) => {
+            const today = new Date();
+            const hourRemaining = Math.abs(parseInt(today.getHours()) - parseInt(item.split(':')[0]));
+            const minuiteRemaining = Math.abs(parseInt(today.getMinutes()) - parseInt(item.split(':')[1]));
+            const timeRemaining = `${hourRemaining} Hours and ${minuiteRemaining} Minuites Remaining`;
+
+            return (
+              <ListItem>
+                <Body>
+                  <Text style={styles.item}>{item}</Text>
+                  <Text note style={styles.remaining}>{timeRemaining}</Text>
+                </Body>
+              </ListItem>
+            );
+          }}
           renderSectionHeader={
             ({ section }) => {
               return <ListItem itemHeader style={styles.sectionHeader}><Text style={styles.headerText}>{section.title}</Text></ListItem>;
