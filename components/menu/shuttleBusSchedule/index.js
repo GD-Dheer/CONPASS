@@ -43,7 +43,7 @@ const Schedule = (props) => {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     forceUpdate();
-    wait(2000).then(() => { return setRefreshing(false); });
+    wait(900).then(() => { return setRefreshing(false); });
   }, [refreshing]);
 
   /** The function will return the appropriate schedule.
@@ -77,15 +77,16 @@ const Schedule = (props) => {
           flexGrow: 1,
           width: '100%',
         }}
-        refreshControl={(
-          <RefreshControl
-            // refresh control used for the Pull to Refresh
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        )}
+
       >
         <SectionList
+          refreshControl={(
+            <RefreshControl
+                    // refresh control used for the Pull to Refresh
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+                )}
           sections={[
             {
               title: props.selectedButtonIndex === 0
