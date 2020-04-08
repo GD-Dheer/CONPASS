@@ -11,18 +11,30 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
   },
+  headerText: {
+    flex: 1,
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center'
+  },
   sectionHeader: {
     width: '100%',
+    height: 60,
+    alignSelf: 'center',
     flex: 1,
-    fontSize: 20,
-    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignItems: 'center',
+
     backgroundColor: '#e9f1f5',
   },
   item: {
     width: '100%',
     flex: 1,
     padding: '6%',
-    fontSize: 29
+    fontSize: 18
   },
 });
 

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   View, Text, ScrollView, SectionList
 } from 'react-native';
-import { ButtonGroup } from 'react-native-elements';
+
 import {
-  Tab, Tabs
+  Tab, Tabs, ListItem
 } from 'native-base';
 import shuttleScheduleInformation from './shuttleScheduleService';
 import styles from './styles';
@@ -18,7 +18,7 @@ export default class ShuttleSchedule extends Component {
           <Tab heading="SGW">
             <Schedule selectedButtonIndex={0} />
           </Tab>
-          <Tab heading="Loy">
+          <Tab heading="LOY">
             <Schedule selectedButtonIndex={1} />
           </Tab>
         </Tabs>
@@ -61,6 +61,7 @@ const Schedule = (props) => {
           width: '100%',
         }}
       >
+
         <SectionList
           sections={[
             {
@@ -69,10 +70,10 @@ const Schedule = (props) => {
               data: getShuttleCampusInformation(props.selectedButtonIndex)
             },
           ]}
-          renderItem={({ item }) => { return <Text style={styles.item}>{item}</Text>; }}
+          renderItem={({ item }) => { return <ListItem><Text style={styles.item}>{item}</Text></ListItem>; }}
           renderSectionHeader={
             ({ section }) => {
-              return <Text style={styles.sectionHeader}>{section.title}</Text>;
+              return <ListItem itemHeader style={styles.sectionHeader}><Text style={styles.headerText}>{section.title}</Text></ListItem>;
             }
       }
           keyExtractor={(item, index) => { return index; }}
