@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    borderWidth: 1,
-    borderRadius: 40,
     borderColor: '#4285f5',
+    bottom: 30
   }
 });
 

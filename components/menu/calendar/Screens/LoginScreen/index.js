@@ -83,7 +83,7 @@ export default class LoginScreen extends Component {
           <View>
             <Image
               style={styles.logo}
-              source={require('./button.png')}
+              source={require('./google.png')}
             />
           </View>
         </TouchableOpacity>
