@@ -16,13 +16,15 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
+    top: 5,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center'
   },
   sectionHeader: {
-    width: '100%',
-    height: 60,
+    width: '98%',
+    borderRadius: 20,
+    height: 50,
     alignSelf: 'center',
     flex: 1,
     justifyContent: 'center',
@@ -31,6 +33,7 @@ const styles = StyleSheet.create({
   },
   remaining: {
     textAlign: 'center',
+    color: '#bfaaaa'
   },
   item: {
     width: '100%',
@@ -38,6 +41,7 @@ const styles = StyleSheet.create({
     padding: '6%',
     fontSize: 18
   },
+
 });
 
 export default styles;
