@@ -12,8 +12,54 @@ import OutdoorDirections from '../directions/outdoorDirections';
 import IndoorDirections from '../directions/indoorDirections';
 import styles from './styles';
 import Suggestions from '../suggestions';
-import { goIntMode, goExtMode } from '../../store/actions';
+import { fromInteriorNavigationStart, fromExteriorNavigationStart } from '../../store/actions';
 import buildings from '../../assets/polygons/polygons';
+
+const vanier = buildings.find((building) => {
+  return building.building === 'VL';
+});
+
+const hall = buildings.find((building) => {
+  return building.building === 'H';
+});
+
+const poiStart = {
+  type: 'POI',
+  definedPlace: 'Saint-Catherine, place Start',
+  coordinates: {
+    latitude: 45.527885,
+    longitude: -73.547471,
+  }
+};
+
+const poiEnd = {
+  type: 'POI',
+  definedPlace: 'Saint-Dominique, POI end',
+  coordinates: {
+    latitude: 45.526541,
+    longitude: -73.598324,
+  },
+};
+
+const buildingStart = {
+  type: 'BUILDING',
+  building: vanier,
+  node: 'VL 201',
+  coordinates: {
+    latitude: vanier.latitude,
+    longitude: vanier.longitude,
+  }
+};
+
+const buildingEnd = {
+  type: 'BUILDING',
+  building: hall,
+  node: 'H 201',
+  coordinates: {
+    latitude: hall.latitude,
+    longitude: hall.longitude,
+  }
+};
 
 class Home extends Component {
   constructor(props) {
@@ -44,35 +90,14 @@ class Home extends Component {
     };
     this.interiorModeOn = this.interiorModeOn.bind(this);
     this.interiorModeOff = this.interiorModeOff.bind(this);
+    this.initiateNavigation = this.initiateNavigation.bind(this);
+    this.getWaypoints = this.getWaypoints.bind(this);
   }
 
-
-  /**
-   * to start from a building to the next, we need to start from one floor
-   * c is class b is poi
-   *
-   * C to C
-   * C to B
-   * B to C
-   * B to B
-   *
-   *
-   *
-   */
   componentDidMount() {
-    const itinirary = {
-      start: {
-        type: 'class',
-        floor: '1'
-      },
-      end: {
-        type: 'poi',
-        coordinates: ''
-      }
-    };
-    setTimeout(() => {
-      this.initiateNavigation(itinirary);
-    }, 2000);
+    // setTimeout(() => {
+    //   this.initiateNavigation(buildingStart, buildingEnd);
+    // }, 2000);
   }
 
   /**
@@ -227,7 +252,7 @@ class Home extends Component {
    */
   interiorModeOn(building, region) {
     this.setState({
-      region,
+      // region,
       interiorMode: true,
       building
     });
@@ -241,95 +266,62 @@ class Home extends Component {
     this.setState({
       interiorMode: false,
       building: null
-    }, () => { this.props.goExtMode(); });
+    });
   }
 
-  /**
-   * use cases:
-   * start outside:
-   *
-   */
-  async initiateNavigation() {
-    const vanier = buildings.find((building) => {
-      return building.building === 'VL';
-    });
-
-    const hall = buildings.find((building) => {
-      return building.building === 'H';
-    });
-
-    // play with these
-
-    const poiStart = {
-      type: 'POI',
-      address: 'Saint-Catherine, place Start',
-      coordinates: {
-        latitude: 45.527885,
-        longitude: -73.547471,
-      }
-    };
-
-    const poiEnd = {
-      type: 'POI',
-      address: 'Saint-Dominique, POI end',
-      coordinates: {
-        latitude: 45.526541,
-        longitude: -73.598324,
-      },
-    };
-
-    const buildingStart = {
-      type: 'BUILDING',
-      building: vanier,
-      node: 'VL 201',
-    };
-
-    const buildingEnd = {
-      type: 'BUILDING',
-      building: hall,
-      node: 'H 201',
-    };
-
-    const startExtCoordinates = {
-      latitude: buildingStart.latitude,
-      longitude: buildingStart.longitude
-    };
-
-    const endExtCoordinates = {
-      latitude: buildingEnd.latitude,
-      longitude: buildingEnd.longitude
-    };
-
+  async initiateNavigation(start, end) {
     const mode = 'walking';
-    const waypoints = await this.getWaypoints(startExtCoordinates.latitude, startExtCoordinates.longitude, endExtCoordinates.latitude, endExtCoordinates.longitude, mode);
 
-    const focusRegion = {
-      latitude: startExtCoordinates.latitude,
-      longitude: startExtCoordinates.longitude,
+    const startCoordinates = {
+      latitude: start.coordinates.latitude,
+      longitude: start.coordinates.longitude
+    };
+
+    const endCoordinates = {
+      latitude: end.coordinates.latitude,
+      longitude: end.coordinates.longitude
+    };
+
+    const focusRegionStart = {
+      latitude: startCoordinates.latitude,
+      longitude: startCoordinates.longitude,
       latitudeDelta: 0.01,
       longitudeDelta: 0.01
     };
 
+    // polyline
+    const polyline = await this.getWaypoints(startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, mode);
+
+    const { interiorMode } = this.state;
+    const itinerary = { start, end };
+
+    if (interiorMode) {
+      console.log('trig from int');
+      this.setState({
+        showDirectionsMenu: true,
+        presetRegion: focusRegionStart,
+        coordinates: polyline
+      }, () => { this.props.fromInteriorNavigationStart(itinerary); });
+    } else {
+      console.log('trig from ext');
+      this.setState({
+        showDirectionsMenu: true,
+        presetRegion: focusRegionStart,
+        coordinates: polyline,
+      }, () => { this.props.fromExteriorNavigationStart(itinerary); });
+    }
+
+
     // based on state, trig interior or exterior
-    
+
     // interior mode
     // const itinerary = {buildingStart, buildingEnd}
-    // const itinerary ={buildingStart, poiEnd}
+    // const itinerary = {buildingStart, poiEnd}
 
     // exteriorMode
     // const itinerary = {buildingStart, buildingEnd}
     // const itinerary = {buildingStart, poiEnd};
     // const itinerary = {poiStart, buildingEnd};
-
-    // prepare UI
-    this.setState(
-      {
-        showDirectionsMenu: true,
-        presetRegion: focusRegion,
-        coordinates: waypoints,
-      },
-      () => { return this.props.goIntMode(itinerary); } // dispatch to redux
-    );
   }
 
   // eslint-disable-next-line react/sort-comp
@@ -416,6 +408,7 @@ class Home extends Component {
           <IndoorDirections
             building={this.state.building}
             interiorModeOff={this.interiorModeOff}
+            initiateNavigation={this.initiateNavigation}
           />
         )}
         {this.state.showSuggestionsList && this.state.interiorMode && (
@@ -432,8 +425,8 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    goIntMode: (itinerary) => { dispatch(goIntMode(itinerary)); },
-    goExtMode: () => { dispatch(goExtMode()); }
+    fromInteriorNavigationStart: (itinerary) => { dispatch(fromInteriorNavigationStart(itinerary)); },
+    fromExteriorNavigationStart: (itinerary) => { dispatch(fromExteriorNavigationStart(itinerary)); }
   };
 };
 

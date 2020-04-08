@@ -1,30 +1,49 @@
 import { createStore } from 'redux';
-import { GO_INT, GO_EXT } from './actionTypes';
+import { FROM_EXTERIOR, FROM_INTERIOR, END_NAVIGATION } from './actionTypes';
 
 // initial store state
 const initialState = {
-  redux_env_mode: 'ext',
-  building: {},
+  start_mode: '',
+  start_type: '',
+  itinerary: '',
 };
 
 // Redux Reducer, this receives actions that are being DISPATCHED
 const reducer = (state = initialState, action) => {
-  console.log('store trig');
-  if (action.type === GO_INT) {
-    // handle logic here if its a building with class or a simple POI
+  if (action.type === FROM_EXTERIOR) {
+    if (action.itinerary.start.type === 'POI') {
+      return {
+        ...state,
+        start_mode: 'EXTERIOR',
+        start_type: 'POI',
+        itinerary: action.itinerary,
+      };
+    } if (action.itinerary.start.type === 'BUILDING') {
+      return {
+        ...state,
+        start_mode: 'EXTERIOR',
+        start_type: 'BUILDING',
+        itinerary: action.itinerary,
+      };
+    }
+  }
+
+  if (action.type === FROM_INTERIOR) {
     return {
       ...state,
-      redux_env_mode: 'int',
+      start_mode: 'INTERIOR',
+      start_type: 'BUILDING',
       itinerary: action.itinerary,
     };
   }
 
-  if (action.type === GO_EXT) {
+  if (action.type === END_NAVIGATION) {
     return {
       ...state,
-      redux_env_mode: 'ext'
+      ...initialState
     };
   }
+
   return state;
 };
 

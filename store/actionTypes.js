@@ -1,3 +1,3 @@
-export const GO_INT = 'GO_INT';
-export const GO_EXT = 'GO_EXT';
+export const FROM_INTERIOR = 'FROM_INTERIOR';
+export const FROM_EXTERIOR = 'FROM_EXTERIOR';
 export const END_NAVIGATION = 'END_NAVIGATION';

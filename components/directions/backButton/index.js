@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 import styles from './styles';
+import { endNavigation } from '../../../store/actions';
 
 
-export default class BackButton extends Component {
+class BackButton extends Component {
+  /**
+   * clears Redux navigation attributes and modifies UI to remove the search bars
+   * from user view
+   */
+  back() {
+    this.props.endNavigation();
+    this.props.changeVisibilityTo(false);
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => {
-          this.props.changeVisibilityTo(false);
+          this.back();
         }}
         >
           <Entypo name="chevron-left" size={32} color="black" />
@@ -18,3 +29,13 @@ export default class BackButton extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    endNavigation: () => { dispatch(endNavigation()); },
+
+  };
+};
+
+
+export default connect(null, mapDispatchToProps)(BackButton);

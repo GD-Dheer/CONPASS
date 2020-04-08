@@ -38,17 +38,26 @@ class TheMap extends Component {
    * Updates view when change detected in props
    */
   componentDidUpdate(prevProps) {
-    const { redux_env_mode, itinerary, polylineVisibility } = this.props;
+    const {
+      start_mode, start_type, itinerary, polylineVisibility
+    } = this.props;
 
+    if (prevProps.start_mode !== start_mode) {
+      if (start_mode === 'EXTERIOR') {
+        if (start_type === 'BUILDING') {
+          this.focusOnBuilding(itinerary.start.building);
+        }
 
-    if (prevProps.redux_env_mode !== redux_env_mode) {
-      if (redux_env_mode === 'int') {
-        this.focusOnBuilding(itinerary.buildingStart);
+        if (start_type === 'POI') {
+          this.focusOnPOI(itinerary.start);
+        }
+      } else if (start_mode === 'INTERIOR') {
+        return;
       }
     }
 
     if (prevProps.polylineVisibility !== polylineVisibility) {
-        this.setState({ polylineVisibility });
+      this.setState({ polylineVisibility });
     }
 
     // const coordinates = this.props.updatedCoordinates;
@@ -99,6 +108,20 @@ class TheMap extends Component {
 
   /**
    *
+   * @param {*} POI - POI to be focused on map
+   *
+   */
+  focusOnPOI(POI) {
+    const { coordinates } = POI;
+    this.state.mapRef.fitToCoordinates([coordinates], {
+      edgePadding: {
+        top: 10, right: 20, bottom: 10, left: 20
+      }
+    });
+  }
+
+  /**
+   *
    * @param {*} coordinates - coords of where to focus
    * When user requests outdoor directions, this function will focus on the polyline path
    */
@@ -136,7 +159,7 @@ class TheMap extends Component {
 
   // do not put conponents that dont belong to react-native-maps API inside the MapView
   render() {
-    const {polylineVisibility} = this.state;
+    const { polylineVisibility } = this.state;
     const buildingFocus = buildings.map((building) => {
       return (
         <CustomPolygon
@@ -212,7 +235,8 @@ class TheMap extends Component {
 // get redux store state
 const mapStateToProps = (state) => {
   return {
-    redux_env_mode: state.redux_env_mode,
+    start_mode: state.start_mode,
+    start_type: state.start_type,
     itinerary: state.itinerary
   };
 };

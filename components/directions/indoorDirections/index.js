@@ -10,13 +10,65 @@ import generateFloorPlan from '../../buildings/floorPlans/floorPlanRepository';
 import generateGraph from '../../../indoor_directions_modules/graphRepository';
 import BackButton from '../backButton';
 import styles from './styles';
+import buildings from '../../../assets/polygons/polygons';
+
+const vanier = buildings.find((building) => {
+  return building.building === 'VL';
+});
+
+const hall = buildings.find((building) => {
+  return building.building === 'H';
+});
+
+const poiStart = {
+  type: 'POI',
+  definedPlace: 'Saint-Catherine, place Start',
+  coordinates: {
+    latitude: 45.527885,
+    longitude: -73.547471,
+  }
+};
+
+const poiEnd = {
+  type: 'POI',
+  definedPlace: 'Saint-Dominique, POI end',
+  coordinates: {
+    latitude: 45.526541,
+    longitude: -73.598324,
+  },
+};
+
+const buildingStart = {
+  type: 'BUILDING',
+  building: vanier,
+  node: 'VL 201',
+  coordinates: {
+    latitude: vanier.latitude,
+    longitude: vanier.longitude,
+  }
+};
+
+const buildingEnd = {
+  type: 'BUILDING',
+  building: hall,
+  node: 'H 201',
+  coordinates: {
+    latitude: hall.latitude,
+    longitude: hall.longitude,
+  }
+};
 
 export default class IndoorDirections extends Component {
   /**
    * Exits Interior mode to return to external map view
    */
+
   interiorModeOff() {
     this.props.interiorModeOff();
+  }
+
+  initiateNavigation() {
+    this.props.initiateNavigation(buildingStart, poiStart);
   }
 
   /**
@@ -49,17 +101,25 @@ export default class IndoorDirections extends Component {
           <View style={styles.buildingLogoContainer}>
             <Image style={styles.buildingLogo} source={buildingLogo} />
           </View>
-          <View>
-            <Text style={styles.buildingName}>
-              {this.limitNameLength(building.buildingName)}
-            </Text>
-          </View>
+          
+          <TouchableOpacity
+            onPress={() => { return this.initiateNavigation(); }}
+          >
+            <View>
+              <Text style={styles.buildingName}>
+                {this.limitNameLength(building.buildingName)}
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+
           <TouchableOpacity
             style={styles.quitInterior}
             onPress={() => { return this.props.interiorModeOff(); }}
           >
             <Image style={styles.quitButton} source={quit} />
           </TouchableOpacity>
+
         </View>
         <View style={styles.buildingViewContainer}>
           <BuildingView

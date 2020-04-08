@@ -1,9 +1,13 @@
-import { GO_INT, GO_EXT } from './actionTypes';
+import { FROM_INTERIOR, FROM_EXTERIOR, END_NAVIGATION } from './actionTypes';
 
-export const goIntMode = (itinerary) => {
-  return { type: GO_INT, itinerary };
+export const fromInteriorNavigationStart = (itinerary) => {
+  return { type: FROM_INTERIOR, itinerary };
 };
 
-export const goExtMode = () => {
-  return { type: GO_EXT };
+export const fromExteriorNavigationStart = (itinerary) => {
+  return { type: FROM_EXTERIOR, itinerary };
+};
+
+export const endNavigation = () => {
+  return { type: END_NAVIGATION };
 };
