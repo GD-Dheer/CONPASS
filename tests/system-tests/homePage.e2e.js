@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import wd from 'wd';
+import APK_PATH from './systemTestSetup';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
 
@@ -7,7 +8,7 @@ const PORT = 4723;
 const config = {
   platformName: 'Android',
   deviceName: 'emulator-5554',
-  app: 'C:\\Users\\Trevor\\Downloads\\--60c9e2c78ed24f2f961c4e1bdde4fd8b-signed.apk', // relative to root of project
+  app: APK_PATH, // relative to root of project
   automationName: 'UiAutomator2',
   appWaitForLaunch: false
 };
