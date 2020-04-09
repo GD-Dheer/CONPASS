@@ -1,8 +1,14 @@
+/* eslint-disable import/first */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
+
 import React from 'react';
 import { shallow } from 'enzyme';
+import { configureStore } from 'redux-mock-store';
 import TheMap from '../components/map/index';
+
+
+
 
 const mockRegion = {
   latitude: 45.492408,
@@ -10,6 +16,12 @@ const mockRegion = {
   latitudeDelta: 0.04,
   longitudeDelta: 0.04
 };
+
+const mockStore = configureStore([]);
+const store = mockStore({
+  myState: 'sample text',
+});
+
 
 const mockPoi = {
   result: {
@@ -42,7 +54,7 @@ it('Should fit screen to updated components', () => {
   };
 
   const fitToCoordinates = jest.fn();
-  wrapper = shallow(<TheMap nearbyMarkers={[]} updatedCoordinates={coordinatesPre} updatedRegion={mockRegion} />);
+  wrapper = shallow(<TheMap store={store} nearbyMarkers={[]} updatedCoordinates={coordinatesPre} updatedRegion={mockRegion} />);
   const spyFitToCoordinates = jest.spyOn(wrapper.instance(), 'fitScreenToPath');
   wrapper.instance().setState({ mapRef: { fitToCoordinates } });
   wrapper.setProps({ updatedCoordinates: coordinatesChanged });
@@ -50,7 +62,7 @@ it('Should fit screen to updated components', () => {
 });
 
 it('Should fetch and send the selected point of interest to the home component', async () => {
-  component = shallow(<TheMap nearbyMarkers={[]} updatedRegion={mockRegion} getDestinationIfSet={getDestinationIfSet} updateRegionCloser={updateRegionCloser} />);
+  component = shallow(<TheMap store={store} nearbyMarkers={[]} updatedRegion={mockRegion} getDestinationIfSet={getDestinationIfSet} updateRegionCloser={updateRegionCloser} />);
   const spyGetDestinationIfSet = jest.spyOn(component.instance().props, 'getDestinationIfSet');
   const spyUpdateRegionCloser = jest.spyOn(component.instance().props, 'updateRegionCloser');
   global.fetch = jest.fn().mockImplementation(() => {
