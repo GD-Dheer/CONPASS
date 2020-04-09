@@ -15,11 +15,12 @@ class CustomPolygon extends Component {
     if (prevProps.itinerary !== itinerary) {
       if (itinerary.end) {
         if (itinerary.end.type === 'BUILDING' && itinerary.end.building.buildingName === building.buildingName) {
-          console.log('right building end');
           this.setState({ isEndBuilding: true });
+        } else {
+          this.setState({ isEndBuilding: false });
         }
       } else {
-          this.setState({ isEndBuilding: false });
+        this.setState({ isEndBuilding: false });
       }
     }
   }

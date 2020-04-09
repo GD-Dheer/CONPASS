@@ -19,7 +19,7 @@ const vanier = buildings.find((building) => {
 const hall = buildings.find((building) => {
   return building.building === 'H';
 });
-
+// constants to remove
 const poiStart = {
   type: 'POI',
   definedPlace: 'Saint-Catherine, place Start',
@@ -68,7 +68,7 @@ export default class IndoorDirections extends Component {
   }
 
   initiateNavigation() {
-    this.props.initiateNavigation(buildingStart, poiStart);
+    this.props.initiateNavigation(buildingStart, poiEnd);
   }
 
   /**
@@ -101,7 +101,7 @@ export default class IndoorDirections extends Component {
           <View style={styles.buildingLogoContainer}>
             <Image style={styles.buildingLogo} source={buildingLogo} />
           </View>
-          
+        
           <TouchableOpacity
             onPress={() => { return this.initiateNavigation(); }}
           >

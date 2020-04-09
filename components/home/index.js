@@ -95,9 +95,9 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   this.initiateNavigation(buildingStart, buildingEnd);
-    // }, 2000);
+    setTimeout(() => {
+      this.initiateNavigation(buildingStart, buildingEnd);
+    }, 2000);
   }
 
   /**
@@ -249,6 +249,7 @@ class Home extends Component {
    * @param {*} region
    * Activates interior mode when building is clicked on
    * Uses the building data to render floors
+   * TODO: place back region @eufekt
    */
   interiorModeOn(building, region) {
     this.setState({
@@ -269,9 +270,7 @@ class Home extends Component {
     });
   }
 
-  async initiateNavigation(start, end) {
-    const mode = 'walking';
-
+  async initiateNavigation(start, end, mode = 'walking') {
     const startCoordinates = {
       latitude: start.coordinates.latitude,
       longitude: start.coordinates.longitude
@@ -289,8 +288,11 @@ class Home extends Component {
       longitudeDelta: 0.01
     };
 
-    // polyline
-    const polyline = await this.getWaypoints(startCoordinates.latitude, startCoordinates.longitude, endCoordinates.latitude, endCoordinates.longitude, mode);
+    const polyline = await this.getWaypoints(startCoordinates.latitude,
+      startCoordinates.longitude,
+      endCoordinates.latitude,
+      endCoordinates.longitude,
+      mode);
 
     const { interiorMode } = this.state;
     const itinerary = { start, end };
@@ -310,9 +312,6 @@ class Home extends Component {
         coordinates: polyline,
       }, () => { this.props.fromExteriorNavigationStart(itinerary); });
     }
-
-
-    // based on state, trig interior or exterior
 
     // interior mode
     // const itinerary = {buildingStart, buildingEnd}

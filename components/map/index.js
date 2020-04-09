@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import buildings from '../../assets/polygons/polygons';
 import CustomPolygon from './customPolygon';
 import styles from './styles';
+import { EXTERIOR, INTERIOR, POI, BUILDING } from '../../store/constants';
 
 let region = '';
 
@@ -43,15 +44,15 @@ class TheMap extends Component {
     } = this.props;
 
     if (prevProps.start_mode !== start_mode) {
-      if (start_mode === 'EXTERIOR') {
-        if (start_type === 'BUILDING') {
+      if (start_mode === EXTERIOR) {
+        if (start_type === BUILDING) {
           this.focusOnBuilding(itinerary.start.building);
         }
 
-        if (start_type === 'POI') {
+        if (start_type === POI) {
           this.focusOnPOI(itinerary.start);
         }
-      } else if (start_mode === 'INTERIOR') {
+      } else if (start_mode === INTERIOR) {
         return;
       }
     }
@@ -60,6 +61,9 @@ class TheMap extends Component {
       this.setState({ polylineVisibility });
     }
 
+    /**
+     * TODO: @eufekt needs to fix this and make it work
+     */
     // const coordinates = this.props.updatedCoordinates;
     // if (prevProps.updatedCoordinates !== coordinates) {
     //   this.fitScreenToPath(coordinates);
