@@ -4,9 +4,8 @@ import React, { Component, useState } from 'react';
 import {
   View, Text, ScrollView, SectionList, RefreshControl
 } from 'react-native';
-
 import {
-  ListItem, Body, Tabs, Tab
+  ListItem, Body, Tabs, Tab, Badge
 } from 'native-base';
 import useForceUpdate from 'use-force-update';
 import shuttleScheduleInformation from './shuttleScheduleService';
@@ -111,11 +110,23 @@ const Schedule = (props) => {
             const timeRemaining = `${hours} hours and ${minutes} Minuites ${passOrRemain}`;
             return (
               <ListItem>
-                <Body>
+                { (Math.sign(diff) === -1 && resultInMinutes < 20)
+                && (
+                <Badge
+                  info
+                  style={{
+                    position: 'absolute', margin: 20, right: 0
+                  }}
+                >
+                  <Text style={{ top: 2 }}>Soon!</Text>
+                </Badge>
+                )}
+                <Body style={{ }}>
                   <Text style={styles.item}>{item}</Text>
                   <Text note style={styles.remaining}>{timeRemaining}</Text>
                 </Body>
               </ListItem>
+
             );
           }}
           renderSectionHeader={
