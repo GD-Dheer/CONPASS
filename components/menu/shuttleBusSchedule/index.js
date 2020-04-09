@@ -107,7 +107,7 @@ const Schedule = (props) => {
             const minutes = resultInMinutes % 60;
             // const hourRemaining = Math.abs(parseInt(today.getHours()) - parseInt(item.split(':')[0]));
             // const minuiteRemaining = Math.abs(parseInt(today.getMinutes()) - parseInt(item.split(':')[1]));
-            const timeRemaining = `${hours} hours and ${minutes} Minuites ${passOrRemain}`;
+            const timeRemaining = `${hours} hours and ${minutes} minutes ${passOrRemain}`;
             return (
               <ListItem>
                 { (Math.sign(diff) === -1 && resultInMinutes < 20)
