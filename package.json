@@ -8,7 +8,7 @@
     "lint": "eslint *.js **/*.js",
     "lint:fix": "eslint *.js **/*.js --fix",
     "test": "jest",
-    "test:e2e": "jest --testMatch=\"**/tests/**/*homePage.e2e.js\"",
+    "test:e2e": "jest --testMatch=\"**/tests/**/*showBuildingInfo.e2e.js\"",
     "postinstall": "jetify"
   },
   "jest": {
