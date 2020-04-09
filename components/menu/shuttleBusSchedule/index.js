@@ -24,6 +24,7 @@ export default class ShuttleSchedule extends Component {
       <View style={styles.container}>
         <Tabs>
           <Tab heading="SGW" textStyle={{ background: 'white' }} tabStyle={{ backgroundColor: '#00d4ff' }} activeTabStyle={{ backgroundColor: '#00d4ff' }}>
+
             <Schedule selectedButtonIndex={0} />
           </Tab>
           <Tab heading="LOY" textStyle={{ background: 'white' }} tabStyle={{ backgroundColor: '#00d4ff' }} activeTabStyle={{ backgroundColor: '#00d4ff' }}>
@@ -95,12 +96,19 @@ const Schedule = (props) => {
             },
           ]}
           renderItem={({ item }) => {
+            const todayWithHoursMinuites = new Date();
+            todayWithHoursMinuites.setHours(`${item.split(':')[0]}`);
+            todayWithHoursMinuites.setMinutes(`${item.split(':')[1]}`);
             const today = new Date();
-            const miniuteHour = parseInt(`${today.getHours()}${today.getMinutes()}`) - parseInt(`${item.split(':')[0]}${item.split(':')[1]}`);
-            const passOrRemain = Math.sign(miniuteHour) === 1 ? 'passed' : 'remaining';
-            const hourRemaining = Math.abs(parseInt(today.getHours()) - parseInt(item.split(':')[0]));
-            const minuiteRemaining = Math.abs(parseInt(today.getMinutes()) - parseInt(item.split(':')[1]));
-            const timeRemaining = `${hourRemaining} Hours and ${minuiteRemaining} Minuites ${passOrRemain}`;
+            const diff = today.getTime() - todayWithHoursMinuites.getTime();
+            const resultInMinutes = Math.round(Math.abs(diff / 60000));
+            const passOrRemain = Math.sign(diff) === 1 ? 'passed' : 'remaining';
+
+            const hours = Math.floor(resultInMinutes / 60);
+            const minutes = resultInMinutes % 60;
+            // const hourRemaining = Math.abs(parseInt(today.getHours()) - parseInt(item.split(':')[0]));
+            // const minuiteRemaining = Math.abs(parseInt(today.getMinutes()) - parseInt(item.split(':')[1]));
+            const timeRemaining = `${hours} hours and ${minutes} Minuites ${passOrRemain}`;
             return (
               <ListItem>
                 <Body>
