@@ -59,6 +59,10 @@ export default class LoginScreen extends Component {
         this.onSignIn(result);
         const { accessToken } = result;
         AsyncStorage.setItem('accessToken', accessToken);
+
+
+        this.getUserCalendars(accessToken);
+
         const userInfoResponse = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events?key=AIzaSyBAHObp5Ic3CbJpkX2500tNhf53e_3wBMA&timeMin=2020-01-01T01:00:00.000Z', {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
@@ -73,6 +77,14 @@ export default class LoginScreen extends Component {
       return { error: true };
     }
   };
+
+  getUserCalendars = async (accessToken)=>{
+    const userCalendars = await fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList?key=AIzaSyBAHObp5Ic3CbJpkX2500tNhf53e_3wBMA&timeMin=2020-01-01T01:00:00.000Z', {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    const jsonFile = await userCalendars.json();
+    console.log(jsonFile.items);
+  }
 
   render() {
     return (
