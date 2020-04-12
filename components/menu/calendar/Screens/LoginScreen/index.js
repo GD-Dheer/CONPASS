@@ -59,16 +59,28 @@ export default class LoginScreen extends Component {
         this.onSignIn(result);
         const { accessToken } = result;
         AsyncStorage.setItem('accessToken', accessToken);
+        
 
+        const userCalendarsGeneralInfo = await this.getUserCalendars(accessToken);
+        let calendarCount = 1;
+        //console.log('-->',userCalendarsGeneralInfo);
 
-        this.getUserCalendars(accessToken);
-
-        const userInfoResponse = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events?key=AIzaSyBAHObp5Ic3CbJpkX2500tNhf53e_3wBMA&timeMin=2020-01-01T01:00:00.000Z', {
+        for(const calendar of userCalendarsGeneralInfo){
+          //console.log('count: ',calendarCount);
+          const userInfoResponse = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?key=AIzaSyBAHObp5Ic3CbJpkX2500tNhf53e_3wBMA&timeMin=2020-01-01T01:00:00.000Z`, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+          });
+          const jsonFile = await userInfoResponse.json();
+          const stringFile = JSON.stringify(jsonFile);
+          AsyncStorage.setItem(`events${calendarCount}`, stringFile);
+          calendarCount++;
+        }
+        /*const userInfoResponse = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events?key=AIzaSyBAHObp5Ic3CbJpkX2500tNhf53e_3wBMA&timeMin=2020-01-01T01:00:00.000Z', {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
         const jsonFile = await userInfoResponse.json();
         const stringFile = JSON.stringify(jsonFile);
-        AsyncStorage.setItem('events', stringFile);
+        AsyncStorage.setItem('events', stringFile);*/
         this.props.navigation.navigate('FetchScreen');
         return result.accessToken;
       }
@@ -91,7 +103,8 @@ export default class LoginScreen extends Component {
           backgroundColor:calendar.backgroundColor
         });
     });
-    console.log(userCalendarsGeneralInfo);
+    //console.log(userCalendarsGeneralInfo);
+    return userCalendarsGeneralInfo;
   }
 
   render() {
