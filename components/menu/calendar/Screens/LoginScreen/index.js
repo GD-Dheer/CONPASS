@@ -83,7 +83,15 @@ export default class LoginScreen extends Component {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     const jsonFile = await userCalendars.json();
-    console.log(jsonFile.items);
+    let userCalendarsGeneralInfo = [];
+    jsonFile.items.forEach(calendar => {
+      userCalendarsGeneralInfo.push({
+          id:calendar.id,
+          summary:calendar.summary,
+          backgroundColor:calendar.backgroundColor
+        });
+    });
+    console.log(userCalendarsGeneralInfo);
   }
 
   render() {
