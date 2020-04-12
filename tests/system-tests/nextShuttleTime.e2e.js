@@ -20,7 +20,7 @@ beforeAll(async () => {
   await driver.sleep(58000); // wait for app to load
 });
 
-test('nextSguttleTime: next shuttle time should display', async () => {
+test('nextShuttleTime: next shuttle time should display', async () => {
   const action = new wd.TouchAction(driver);
   await action.tap({ x: 976, y: 1535 });
   action.release();
