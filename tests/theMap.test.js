@@ -8,8 +8,6 @@ import { configureStore } from 'redux-mock-store';
 import TheMap from '../components/map/index';
 
 
-
-
 const mockRegion = {
   latitude: 45.492408,
   longitude: -73.582153,
@@ -38,7 +36,7 @@ const mockPoi = {
 };
 
 
-const getDestinationIfSet = jest.fn();
+const setDestinationIfSelected = jest.fn();
 const updateRegionCloser = jest.fn();
 
 
@@ -62,8 +60,8 @@ it('Should fit screen to updated components', () => {
 });
 
 it('Should fetch and send the selected point of interest to the home component', async () => {
-  component = shallow(<TheMap store={store} nearbyMarkers={[]} updatedRegion={mockRegion} getDestinationIfSet={getDestinationIfSet} updateRegionCloser={updateRegionCloser} />);
-  const spyGetDestinationIfSet = jest.spyOn(component.instance().props, 'getDestinationIfSet');
+  component = shallow(<TheMap store={store} nearbyMarkers={[]} updatedRegion={mockRegion} setDestinationIfSelected={setDestinationIfSelected} updateRegionCloser={updateRegionCloser} />);
+  const spySetDestinationIfSelected = jest.spyOn(component.instance().props, 'setDestinationIfSelected');
   const spyUpdateRegionCloser = jest.spyOn(component.instance().props, 'updateRegionCloser');
   global.fetch = jest.fn().mockImplementation(() => {
     const promise = new Promise((resolve) => {
@@ -77,6 +75,6 @@ it('Should fetch and send the selected point of interest to the home component',
   });
 
   await component.instance().selectPoi({ nativeEvent: { placeId: '123' } });
-  expect(spyGetDestinationIfSet).toHaveBeenCalled();
+  expect(spySetDestinationIfSelected).toHaveBeenCalled();
   expect(spyUpdateRegionCloser).toHaveBeenCalled();
 });
