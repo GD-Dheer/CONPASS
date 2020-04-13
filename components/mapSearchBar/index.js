@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 /* eslint-disable max-len */
 /* eslint-disable react/no-access-state-in-setstate */
->>>>>>> US4E
 import React, { Component } from 'react';
 import {
   View,
@@ -79,21 +76,6 @@ export default class searchBar extends Component {
           predictions: allPredictions
         });
       }
-<<<<<<< HEAD
-
-      const json = await this.getPredictions(destination);
-      const { currentBuilding } = this.state;
-      const finalPredictions = currentBuilding !== null && destination !== ''
-        ? [
-          currentBuilding,
-          ...json.predictions.slice(0, json.predictions.length - 1)
-        ]
-        : json.predictions;
-      this.setState({
-        predictions: finalPredictions
-      });
-=======
->>>>>>> US4E
     } catch (err) {
       console.error(err);
     }
@@ -105,12 +87,7 @@ export default class searchBar extends Component {
    * @param {String} destination - String to get predictions for
    * @returns {Promise} - Promise object represents Google's API json response
    */
-<<<<<<< HEAD
-  // eslint-disable-next-line consistent-return
-  async getPredictions(destination) {
-=======
   async getGoogleApiPredictions(destination) {
->>>>>>> US4E
     const key = 'AIzaSyCqNODizSqMIWbKbO8Iq3VWdBcK846n_3w';
     const apiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${key}&input=${destination}&location=45.492409, -73.582153&radius=2000`;
 
@@ -278,6 +255,10 @@ export default class searchBar extends Component {
       console.error(err);
       return null;
     }
+  }
+
+  start(prediction) {
+    console.log(prediction);
   }
 
   render() {

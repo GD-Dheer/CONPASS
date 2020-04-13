@@ -16,51 +16,6 @@ import styles from './styles';
 import { fromInteriorNavigationStart, fromExteriorNavigationStart } from '../../store/actions';
 import buildings from '../../assets/polygons/polygons';
 
-const vanier = buildings.find((building) => {
-  return building.building === 'VL';
-});
-
-const hall = buildings.find((building) => {
-  return building.building === 'H';
-});
-
-const poiStart = {
-  type: 'POI',
-  definedPlace: 'Saint-Catherine, place Start',
-  coordinates: {
-    latitude: 45.527885,
-    longitude: -73.547471,
-  }
-};
-
-const poiEnd = {
-  type: 'POI',
-  definedPlace: 'Saint-Dominique, POI end',
-  coordinates: {
-    latitude: 45.526541,
-    longitude: -73.598324,
-  },
-};
-
-const buildingStart = {
-  type: 'BUILDING',
-  building: vanier,
-  node: 'VL 201',
-  coordinates: {
-    latitude: vanier.latitude,
-    longitude: vanier.longitude,
-  }
-};
-
-const buildingEnd = {
-  type: 'BUILDING',
-  building: hall,
-  node: 'H 201',
-  coordinates: {
-    latitude: hall.latitude,
-    longitude: hall.longitude,
-  }
-};
 
 class Home extends Component {
   constructor(props) {
@@ -186,7 +141,16 @@ class Home extends Component {
   generateIndoorPredictionsForSearchBar = () => {
     const hallData = fetchBuildingRooms('H');
     const vlData = fetchBuildingRooms('VL');
+
     const indoorRoomsList = [];
+
+    const vanier = buildings.find((building) => {
+      return building.building === 'VL';
+    });
+    
+    const hall = buildings.find((building) => {
+      return building.building === 'H';
+    });
 
     const hallRooms = Object.keys(hallData);
     const vlRooms = Object.keys(vlData);
@@ -203,6 +167,7 @@ class Home extends Component {
 
         const currentAvailableRoom = {
           id: roomString,
+          building: hall,
           description: roomString,
           place_id: 'ChIJtd6Zh2oayUwRAu_CnRIfoBw',
           dijkstraId: room,
@@ -223,6 +188,7 @@ class Home extends Component {
         }
         const currentAvailableRoom = {
           id: roomString,
+          building: vanier,
           description: roomString,
           place_id: 'ChIJDbfcNjIXyUwRcocn3RuPPiY',
           dijkstraId: room,
@@ -286,7 +252,6 @@ class Home extends Component {
       }
     });
   };
-
 
   updateRegionCloser = (newRegion) => {
     this.setState({
@@ -457,7 +422,7 @@ class Home extends Component {
         />
         {this.state.showDirectionsMenu && (
           <OutdoorDirections
-            initiateNavigation = {this.initiateNavigation}
+            initiateNavigation={this.initiateNavigation}
             getDestinationIfSet={this.state.destinationToGo}
             getRegion={this.getRegionFromOutdoorDirections}
             getRegionFromSearch={this.state.region}
@@ -472,7 +437,7 @@ class Home extends Component {
         {this.state.interiorMode
         && (
           <IndoorDirections
-            initiateNavigation = {this.initiateNavigation}
+            initiateNavigation={this.initiateNavigation}
             getDestinationIfSet={this.state.destinationToGo}
             getRegion={this.getRegionFromOutdoorDirections}
             getRegionFromSearch={this.state.region}

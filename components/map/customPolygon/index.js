@@ -10,21 +10,6 @@ class CustomPolygon extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    const { itinerary, building } = this.props;
-    if (prevProps.itinerary !== itinerary) {
-      if (itinerary.end) {
-        if (itinerary.end.type === 'BUILDING' && itinerary.end.building.buildingName === building.buildingName) {
-          this.setState({ isEndBuilding: true });
-        } else {
-          this.setState({ isEndBuilding: false });
-        }
-      } else {
-        this.setState({ isEndBuilding: false });
-      }
-    }
-  }
-
   /**
    * function focuses on building when selected on map
    */
@@ -37,7 +22,6 @@ class CustomPolygon extends Component {
     }
     this.props.focusOnBuilding(building);
   }
-
 
   render() {
     const { building } = this.props;
@@ -55,11 +39,4 @@ class CustomPolygon extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    itinerary: state.itinerary,
-  };
-};
-
-
-export default connect(mapStateToProps)(CustomPolygon);
+export default CustomPolygon;

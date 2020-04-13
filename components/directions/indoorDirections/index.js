@@ -3,6 +3,7 @@ import {
   View, Image, Text, Modal
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
 import CurrentLocation from '../currentLocation';
 import Destination from '../destination';
 import buildingLogo from '../../../assets/icons/building.png';
@@ -21,54 +22,7 @@ import dijkstraPathfinder from '../../../indoor_directions_modules/dijkstraPathf
 import styles from './styles';
 import buildings from '../../../assets/polygons/polygons';
 
-const vanier = buildings.find((building) => {
-  return building.building === 'VL';
-});
-
-const hall = buildings.find((building) => {
-  return building.building === 'H';
-});
-// constants to remove
-const poiStart = {
-  type: 'POI',
-  definedPlace: 'Saint-Catherine, place Start',
-  coordinates: {
-    latitude: 45.527885,
-    longitude: -73.547471,
-  }
-};
-
-const poiEnd = {
-  type: 'POI',
-  definedPlace: 'Saint-Dominique, POI end',
-  coordinates: {
-    latitude: 45.526541,
-    longitude: -73.598324,
-  },
-};
-
-const buildingStart = {
-  type: 'BUILDING',
-  building: vanier,
-  node: 'VL 201',
-  coordinates: {
-    latitude: vanier.latitude,
-    longitude: vanier.longitude,
-  }
-};
-
-const buildingEnd = {
-  type: 'BUILDING',
-  building: hall,
-  node: 'H 201',
-  coordinates: {
-    latitude: hall.latitude,
-    longitude: hall.longitude,
-  }
-};
-
-
-export default class IndoorDirections extends Component {
+class IndoorDirections extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,6 +32,7 @@ export default class IndoorDirections extends Component {
       indoorDirectionsPolyLine: {},
       showDirectionsModal: false,
       drawPath: true,
+      isEndBuilding: false,
       origin: '',
       showPolyline: false,
       mode: 'walking',
@@ -101,6 +56,17 @@ export default class IndoorDirections extends Component {
     this.indoorDirectionHandler = this.indoorDirectionHandler.bind(this);
   }
 
+  componentDidMount() {
+    const { end_destination } = this.props;
+    if (end_destination) {
+      console.log(end_destination.dijkstraId);
+      componentDidMount() {
+        this.setState({
+          origin: 'H-801'
+        },()=> this.dijkstraHandler('501', 5));
+      }
+    }
+  }
 
   /**
    * Changes visibility of directions search menus depending on context
@@ -149,10 +115,6 @@ export default class IndoorDirections extends Component {
   setOriginInput = (origin) => {
     this.setState({ origin });
   }
-  
-  initiateNavigation() {
-    this.props.initiateNavigation(buildingStart, poiEnd);
-  }
 
 
   /**
@@ -189,6 +151,7 @@ export default class IndoorDirections extends Component {
         updatedDirectionPath[floors[i]] = paths[i];
       }
     }
+    console.log(updatedDirectionPath);
     this.setState({
       indoorDirectionsPolyLine: updatedDirectionPath,
       showDirectionsModal: false,
@@ -293,7 +256,7 @@ export default class IndoorDirections extends Component {
           <View style={styles.buildingLogoContainer}>
             <Image style={styles.buildingLogo} source={buildingLogo} />
           </View>
-        
+
           <TouchableOpacity
             onPress={() => { return this.initiateNavigation(); }}
           >
@@ -398,3 +361,11 @@ export default class IndoorDirections extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    end_destination: state.end_destination,
+  };
+};
+
+export default connect(mapStateToProps)(IndoorDirections);

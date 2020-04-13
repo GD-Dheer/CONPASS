@@ -8,9 +8,11 @@ import { SearchBar } from 'react-native-elements';
 import decodePolyline from 'decode-google-map-polyline';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import { connect } from 'react-redux';
 import styles from './styles';
+import { sendEndDestination } from '../../../store/actions';
 
-export default class DestinationSearchBar extends Component {
+class DestinationSearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -153,7 +155,6 @@ export default class DestinationSearchBar extends Component {
     return mixedPredictions;
   }
 
-
   async drawPath() {
     try {
       await this.getCurrentLocation();
@@ -190,9 +191,11 @@ export default class DestinationSearchBar extends Component {
   selectPrediction(prediction) {
     this.setState({ destination: prediction.description });
     this.getLatLong(prediction.place_id);
-    this.setIndoorDestination(prediction);
+    // this.setIndoorDestination(prediction);
     this.setState({ showPredictions: false });
-    console.log(prediction);
+    if (prediction.dijkstraId) {
+      this.props.sendEndDestination(prediction);
+    }
   }
 
   render() {
@@ -263,3 +266,11 @@ export default class DestinationSearchBar extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendEndDestination: (prediction) => { dispatch(sendEndDestination(prediction)); },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(DestinationSearchBar);

@@ -1,5 +1,7 @@
 import { createStore } from 'redux';
-import { FROM_EXTERIOR, FROM_INTERIOR, END_NAVIGATION } from './actionTypes';
+import {
+  FROM_EXTERIOR, FROM_INTERIOR, END_NAVIGATION, SEND_END_DESTINATION
+} from './actionTypes';
 import {
   EXTERIOR, POI, BUILDING, INTERIOR
 } from './constants';
@@ -10,10 +12,18 @@ const initialState = {
   start_mode: '',
   start_type: '',
   itinerary: '',
+  end_destination: '',
 };
 
 // Redux Reducer, this receives actions that are being DISPATCHED
 const reducer = (state = initialState, action) => {
+  if (action.type === SEND_END_DESTINATION) {
+    return {
+      ...state,
+      end_destination: action.destination,
+    };
+  }
+
   if (action.type === FROM_EXTERIOR) {
     if (action.itinerary.start.type === POI) {
       return {

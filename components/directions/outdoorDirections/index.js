@@ -87,7 +87,7 @@ export default class OutdoorDirections extends Component {
             indoorRoomsList={this.props.indoorRoomsList}
           />
           <DestinationSearchBar
-            initiateNavigation = {this.initiateNavigation}
+            initiateNavigation={this.initiateNavigation}
             drawPath={this.state.drawPath}
             getRegionFromSearch={this.props.getRegionFromSearch}
             getDestinationIfSet={this.props.getDestinationIfSet}
