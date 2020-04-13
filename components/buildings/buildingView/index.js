@@ -8,12 +8,12 @@ class BuildingView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      floorPlan: this.props.buildingFloorPlans[0]
+      floor: this.props.buildingFloorPlans[0]
     };
   }
 
   render() {
-    const { floorPlan } = this.state;
+    const { floor } = this.state;
     return (
       <View style={styles.container}>
         <ReactNativeZoomableView
@@ -23,13 +23,10 @@ class BuildingView extends Component {
           initialZoom={1}
         >
           <View style={styles.indoorView}>
-            {floorPlan && (
+            {floor && (
             <BuildingWithFloors
-              floorPlan={floorPlan}
-              buildingFloorPlans={this.props.buildingFloorPlans}
+              floor={floor}
               changeCurrentFloorPlanTo={this.props.changeCurrentFloorPlanTo}
-              indoorDirectionsPolyLine={this.props.indoorDirectionsPolyLine}
-              showPolyline={this.props.showPolyline}
               {...this.props}
             />
             ) }

@@ -169,9 +169,7 @@ class Home extends Component {
           id: roomString,
           building: hall,
           description: roomString,
-          place_id: 'ChIJtd6Zh2oayUwRAu_CnRIfoBw',
-          dijkstraId: room,
-          floor,
+          place_id: 'ChIJtd6Zh2oayUwRAu_CnRIfoBw'
         };
         indoorRoomsList.push(currentAvailableRoom);
       });
@@ -190,9 +188,7 @@ class Home extends Component {
           id: roomString,
           building: vanier,
           description: roomString,
-          place_id: 'ChIJDbfcNjIXyUwRcocn3RuPPiY',
-          dijkstraId: room,
-          floor,
+          place_id: 'ChIJDbfcNjIXyUwRcocn3RuPPiY'
         };
         indoorRoomsList.push(currentAvailableRoom);
       });
