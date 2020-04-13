@@ -2,8 +2,6 @@
 /* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { connect } from 'react-redux';
-import decodePolyline from 'decode-google-map-polyline';
 import TheMap from '../map';
 import MapSearchBar from '../mapSearchBar';
 import Location from '../location';
@@ -13,8 +11,6 @@ import OutdoorDirections from '../directions/outdoorDirections';
 import IndoorDirections from '../directions/indoorDirections';
 import fetchBuildingRooms from '../../indoor_directions_modules/fetchBuildingRooms';
 import styles from './styles';
-import { fromInteriorNavigationStart, fromExteriorNavigationStart } from '../../store/actions';
-import buildings from '../../assets/polygons/polygons';
 
 
 class Home extends Component {
@@ -48,8 +44,8 @@ class Home extends Component {
     this.turnInteriorModeOn = this.turnInteriorModeOn.bind(this);
     this.turnInteriorModeOff = this.turnInteriorModeOff.bind(this);
     this.setBuildingInfoModalVisibilityTo = this.setBuildingInfoModalVisibilityTo.bind(this);
-    this.initiateNavigation = this.initiateNavigation.bind(this);
-    this.getWaypoints = this.getWaypoints.bind(this);
+    this.updateRegion = this.updateRegion.bind(this);
+    // this.initiateNavigation = this.initiateNavigation.bind(this);
   }
 
   componentDidMount() {
@@ -64,7 +60,7 @@ class Home extends Component {
    * destination option in directions mode
    * @param {object} destination - current selected destination
    */
-  getDestinationIfSet = (destination) => {
+  setDestinationIfSelected = (destination) => {
     this.setState({ destinationToGo: destination });
   };
 
@@ -76,14 +72,6 @@ class Home extends Component {
     this.setState({
       showCampusToggle
     });
-  };
-
-  /**
-   * gets new region from 'OutdoorDirections' component and updates region state
-   * @param {object} region - New region to be passed.
-   */
-  getRegionFromOutdoorDirections = (region) => {
-    this.updateRegion(region);
   };
 
   /**
@@ -109,7 +97,7 @@ class Home extends Component {
    *    }]
    *
    */
-  getNearbyMarkers=(markers) => {
+  getNearbyMarkers = (markers) => {
     this.setState({ nearbyMarkers: markers });
   }
 
@@ -122,6 +110,66 @@ class Home extends Component {
       buildingInfoData,
       showBuildingInfoModal: true
     });
+  }
+
+  /**
+   * Retreives location points (lat, lg) of places around SGW or LOY
+   * depending on what the user searches for
+   * @param {string} value - Value of whatever is inputed into the search bar
+   */
+  async getNearbyPlaces(value) {
+    if (value.toLowerCase().includes('near sgw') || value.toLowerCase().includes('near loy')) {
+      const formattedVal = value.substring(0, value.indexOf('near')).trim().replace(' ', '+');
+      if (value.toLowerCase().includes('sgw')) {
+        this.setState({
+          region: {
+            latitude: 45.492409,
+            longitude: -73.582153,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05
+          }
+        }, () => { this.setNearbyPlaces(formattedVal); });
+      } else { // 'Loy' case
+        this.setState({
+          region: {
+            latitude: 45.458295,
+            longitude: -73.640353,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05
+          }
+        }, () => { this.setNearbyPlaces(formattedVal); });
+      }
+    }
+  }
+
+  /**
+   * Sets marker points (lat, lg) of places around SGW or LOY
+   * that correspond to what user is searching for
+   * @param {string} formattedVal - Amenity that user is looking for
+   */
+  async setNearbyPlaces(formattedVal) {
+    const markers = [];
+    const key = 'AIzaSyCqNODizSqMIWbKbO8Iq3VWdBcK846n_3w';
+    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${formattedVal}&location=${this.state.region.latitude},${this.state.region.longitude}&radius=2&key=${key}`;
+    const georesult = await fetch(url);
+    const gjson = await georesult.json();
+    // pushing object to the markers. This is what is passed in the props
+    gjson.results.map((result) => {
+      return (markers.push({
+        id: result.id,
+        title: result.name,
+        description: result.formatted_address,
+        coordinates: {
+          latitude: result.geometry.location.lat,
+          longitude: result.geometry.location.lng
+        }
+      }));
+    });
+    if (markers.length > 0) {
+      // Updating the view
+      this.updateRegion(this.state.region);
+      this.getNearbyMarkers(markers);
+    }
   }
 
 
@@ -144,14 +192,6 @@ class Home extends Component {
 
     const indoorRoomsList = [];
 
-    const vanier = buildings.find((building) => {
-      return building.building === 'VL';
-    });
-    
-    const hall = buildings.find((building) => {
-      return building.building === 'H';
-    });
-
     const hallRooms = Object.keys(hallData);
     const vlRooms = Object.keys(vlData);
 
@@ -167,10 +207,10 @@ class Home extends Component {
 
         const currentAvailableRoom = {
           id: roomString,
-          building: hall,
           description: roomString,
           place_id: 'ChIJtd6Zh2oayUwRAu_CnRIfoBw',
           dijkstraId: room,
+          buidling: 'H',
           floor,
         };
         indoorRoomsList.push(currentAvailableRoom);
@@ -188,10 +228,10 @@ class Home extends Component {
         }
         const currentAvailableRoom = {
           id: roomString,
-          building: vanier,
           description: roomString,
           place_id: 'ChIJDbfcNjIXyUwRcocn3RuPPiY',
           dijkstraId: room,
+          building: 'VL',
           floor,
         };
         indoorRoomsList.push(currentAvailableRoom);
@@ -230,29 +270,6 @@ class Home extends Component {
   };
 
 
-  /**
-   * updates region and passes the new region 'map' component.
-   * @param {object} newRegion - New region to be passed.
-   */
-  updateRegion = (newRegion) => {
-    this.setState({
-      presetRegion: {
-        latitude: newRegion.latitude,
-        longitude: newRegion.longitude,
-        latitudeDelta: 0.05,
-        longitudeDelta: 0.05
-      }
-    });
-    this.setState({
-      region: {
-        latitude: newRegion.latitude,
-        longitude: newRegion.longitude,
-        latitudeDelta: 0.05,
-        longitudeDelta: 0.05
-      }
-    });
-  };
-
   updateRegionCloser = (newRegion) => {
     this.setState({
       presetRegion: {
@@ -272,6 +289,28 @@ class Home extends Component {
     });
   }
 
+  /**
+   * updates region and passes the new region 'map' component.
+   * @param {object} newRegion - New region to be passed.
+   */
+  updateRegion(newRegion) {
+    this.setState({
+      presetRegion: {
+        latitude: newRegion.latitude,
+        longitude: newRegion.longitude,
+        latitudeDelta: 0.05,
+        longitudeDelta: 0.05
+      }
+    });
+    this.setState({
+      region: {
+        latitude: newRegion.latitude,
+        longitude: newRegion.longitude,
+        latitudeDelta: 0.05,
+        longitudeDelta: 0.05
+      }
+    });
+  }
 
   /**
    *
@@ -281,11 +320,10 @@ class Home extends Component {
    * Uses the building data to render floors
    * TODO: place back region @eufekt
    */
-  turnInteriorModeOn(building, region) {
+  turnInteriorModeOn() {
     this.setState({
       // region,
       interiorMode: true,
-      building
     });
   }
 
@@ -296,88 +334,7 @@ class Home extends Component {
   turnInteriorModeOff() {
     this.setState({
       interiorMode: false,
-      building: null
     });
-  }
-
-  async initiateNavigation(start, end, mode = 'walking') {
-    const startCoordinates = {
-      latitude: start.coordinates.latitude,
-      longitude: start.coordinates.longitude
-    };
-
-    const endCoordinates = {
-      latitude: end.coordinates.latitude,
-      longitude: end.coordinates.longitude
-    };
-
-    const focusRegionStart = {
-      latitude: startCoordinates.latitude,
-      longitude: startCoordinates.longitude,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01
-    };
-
-    const polyline = await this.getWaypoints(startCoordinates.latitude,
-      startCoordinates.longitude,
-      endCoordinates.latitude,
-      endCoordinates.longitude,
-      mode);
-
-    const { interiorMode } = this.state;
-    const itinerary = { start, end };
-
-    if (interiorMode) {
-      console.log('trig from int');
-      this.setState({
-        showDirectionsMenu: true,
-        presetRegion: focusRegionStart,
-        coordinates: polyline
-      }, () => { this.props.fromInteriorNavigationStart(itinerary); });
-    } else {
-      console.log('trig from ext');
-      this.setState({
-        showDirectionsMenu: true,
-        presetRegion: focusRegionStart,
-        coordinates: polyline,
-      }, () => { this.props.fromExteriorNavigationStart(itinerary); });
-    }
-
-    // interior mode
-    // const itinerary = {buildingStart, buildingEnd}
-    // const itinerary = {buildingStart, poiEnd}
-
-    // exteriorMode
-    // const itinerary = {buildingStart, buildingEnd}
-    // const itinerary = {buildingStart, poiEnd};
-    // const itinerary = {poiStart, buildingEnd};
-  }
-
-  // eslint-disable-next-line react/sort-comp
-  async getWaypoints(originLat, originLong, destinationLat, destinationLong, mode) {
-    let waypoints;
-    try {
-      const key = 'AIzaSyBsMjuj6q76Vcna8G5z9PDyTH2z16fNPDk';
-      const directionUrl = `https://maps.googleapis.com/maps/api/directions/json?key=${key}&origin=${originLat},${originLong}&destination=${destinationLat},${destinationLong}&mode=${mode}`;
-      const result = await fetch(directionUrl);
-      const json = await result.json();
-      // eslint-disable-next-line camelcase
-      const encryptedPath = json.routes[0]?.overview_polyline.points;
-      if (encryptedPath) {
-        const rawPolylinePoints = decodePolyline(encryptedPath);
-        // Incompatible field names for direct decode. Need to do a trivial conversion.
-        waypoints = rawPolylinePoints.map((point) => {
-          return {
-            latitude: point.lat,
-            longitude: point.lng
-          };
-        });
-      }
-    } catch (err) {
-      console.error(err);
-    }
-
-    return waypoints;
   }
 
   render() {
@@ -390,14 +347,14 @@ class Home extends Component {
           turnInteriorModeOn={this.turnInteriorModeOn}
           updatedRegion={this.state.presetRegion}
           polylineVisibility={this.state.showDirectionsMenu}
-          getDestinationIfSet={this.getDestinationIfSet}
+          setDestinationIfSelected={this.setDestinationIfSelected}
           updateRegionCloser={this.updateRegionCloser}
           nearbyMarkers={this.state.nearbyMarkers}
           getBuildingInfoData={this.getBuildingInfoData}
         />
         {!this.state.showDirectionsMenu && (
         <MapSearchBar
-          getDestinationIfSet={this.getDestinationIfSet}
+          setDestinationIfSelected={this.setDestinationIfSelected}
           navigation={this.props.navigation}
           updateRegion={this.updateRegion}
           changeVisibilityTo={this.changeVisibilityTo}
@@ -405,6 +362,7 @@ class Home extends Component {
           currentBuildingPred={this.state.currentBuildingAddress}
           nearbyMarkers={this.getNearbyMarkers}
           indoorRoomsList={this.state.indoorRoomsList}
+          getNearbyPlaces={this.getNearbyPlaces}
         />
         )}
         {this.state.showCampusToggle && (
@@ -422,9 +380,8 @@ class Home extends Component {
         />
         {this.state.showDirectionsMenu && (
           <OutdoorDirections
-            initiateNavigation={this.initiateNavigation}
-            getDestinationIfSet={this.state.destinationToGo}
-            getRegion={this.getRegionFromOutdoorDirections}
+            getDestinationIfSelected={this.state.destinationToGo}
+            updateRegion={this.updateRegion}
             getRegionFromSearch={this.state.region}
             getCoordinates={this.getCoordinatesFromOutdoorDirections}
             changeVisibilityTo={this.changeVisibilityTo}
@@ -437,9 +394,8 @@ class Home extends Component {
         {this.state.interiorMode
         && (
           <IndoorDirections
-            initiateNavigation={this.initiateNavigation}
-            getDestinationIfSet={this.state.destinationToGo}
-            getRegion={this.getRegionFromOutdoorDirections}
+            getDestinationIfSelected={this.state.destinationToGo}
+            updateRegion={this.updateRegion}
             getRegionFromSearch={this.state.region}
             getCoordinates={this.getCoordinatesFromOutdoorDirections}
             showBuildingInfoModal={this.state.showBuildingInfoModal}
@@ -454,12 +410,4 @@ class Home extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fromInteriorNavigationStart: (itinerary) => { dispatch(fromInteriorNavigationStart(itinerary)); },
-    fromExteriorNavigationStart: (itinerary) => { dispatch(fromExteriorNavigationStart(itinerary)); }
-  };
-};
-
-
-export default connect(null, mapDispatchToProps)(Home);
+export default Home;

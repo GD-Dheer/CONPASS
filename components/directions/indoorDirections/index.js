@@ -60,11 +60,6 @@ class IndoorDirections extends Component {
     const { end_destination } = this.props;
     if (end_destination) {
       console.log(end_destination.dijkstraId);
-      componentDidMount() {
-        this.setState({
-          origin: 'H-801'
-        },()=> this.dijkstraHandler('501', 5));
-      }
     }
   }
 
@@ -171,7 +166,7 @@ class IndoorDirections extends Component {
     if (adjacencyGraphs[startFloor][startNodeId] !== undefined
       && adjacencyGraphs[finishFloor][finishNodeId] !== undefined) {
       if (startFloor === finishFloor) {
-        return [
+        const result = [
           [
             {
               start: startNodeId,
@@ -185,61 +180,38 @@ class IndoorDirections extends Component {
             startFloor
           ]
         ];
+
+        console.log(result);
+
+        return result;
       }
       // Staircase 1 as default is temporary.
       // US4C will take care of finding the optimal meeting point.
-      return [
-        [
-          {
-            start: startNodeId,
-            finish: 'staircase_1'
-          },
-          {
-            start: 'staircase_1',
-            finish: finishNodeId
-          }
-        ],
-        [
-          adjacencyGraphs[startFloor],
-          adjacencyGraphs[finishFloor]
-        ],
-        [
-          startFloor,
-          finishFloor
-        ]
+      const result = [[
+        {
+          start: startNodeId,
+          finish: 'staircase_1'
+        },
+        {
+          start: 'staircase_1',
+          finish: finishNodeId
+        }
+      ],
+      [
+        adjacencyGraphs[startFloor],
+        adjacencyGraphs[finishFloor]
+      ],
+      [
+        startFloor,
+        finishFloor
+      ]
       ];
+
+      console.log(result);
+
+      return result;
     }
     return [[], [], []];
-  }
-
-  /**
-   *
-   * @param {*} input - input string to be parsed into format for djikstra
-   */
-  inputParser(input) {
-    const globalRoomNumberRegex = /^\w-\d{3,}(\.\d{2})?$/i; // ex: H-837 (also H-837.05).
-    const localRoomNumberRegex = /^\d{3,}(\.\d{2})?$/i; // above except w/o building code.
-    const amenityRegex = /^\w+( \w+)*$/i; // Words and spaces.
-
-    let id = '';
-    let { floor } = this.state.currentFloorPlan.floor; // Assume current floor until input says otherwise.
-
-    if (globalRoomNumberRegex.test(input) || localRoomNumberRegex.test(input)) {
-      // Temporary: take current building until multi-building directions are complete.
-      if (globalRoomNumberRegex.test(input)) {
-        id = input.replace(/^\w-/, ''); // Snip the building code.
-      } else {
-        id = input;
-      }
-      floor = input.replace(/\d{0,2}(\.\d{2})?$/i, ''); // Snip all except the floor number.
-    } else if (amenityRegex.test(input)) {
-      id = input.replace(/ /g, '_').toLowerCase(); // Graph id's are denoted in lowercase and snake case.
-      if (/^node_/i.test(id)) {
-        // Do not allow directions to intermediate nodes.
-        id = ' ';
-      }
-    }
-    return [id, floor];
   }
 
   render() {

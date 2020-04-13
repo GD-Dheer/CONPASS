@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable react/no-access-state-in-setstate */
 import React, { Component } from 'react';
 import {
   View,
@@ -96,95 +95,7 @@ export default class searchBar extends Component {
       return await result.json();
     } catch (err) {
       console.error(err);
-    }
-  }
-
-  /**
-   * Retreives location points (lat, lg) of places around SGW or LOY
-   * depending on what the user searches for
-   * @param {string} value - Value of whatever is inputed into the search bar
-   */
-  async getNearbyPlaces(value) {
-    if (value.toLowerCase().includes('near sgw') || value.toLowerCase().includes('near loy')) {
-      const formattedVal = value.substring(0, value.indexOf('near')).trim().replace(' ', '+');
-      if (value.toLowerCase().includes('sgw')) {
-        this.setState({
-          region: {
-            latitude: 45.492409,
-            longitude: -73.582153,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05
-          }
-        }, () => { this.setNearbyPlaces(formattedVal); });
-      } else { // 'Loy' case
-        this.setState({
-          region: {
-            latitude: 45.458295,
-            longitude: -73.640353,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05
-          }
-        }, () => { this.setNearbyPlaces(formattedVal); });
-      }
-    }
-  }
-
-  /**
-   * Sets marker points (lat, lg) of places around SGW or LOY
-   * that correspond to what user is searching for
-   * @param {string} formattedVal - Amenity that user is looking for
-   */
-  async setNearbyPlaces(formattedVal) {
-    const markers = [];
-    const key = 'AIzaSyCqNODizSqMIWbKbO8Iq3VWdBcK846n_3w';
-    const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${formattedVal}&location=${this.state.region.latitude},${this.state.region.longitude}&radius=2&key=${key}`;
-    const georesult = await fetch(url);
-    const gjson = await georesult.json();
-    // pushing object to the markers. This is what is passed in the props
-    gjson.results.map((result) => {
-      return (markers.push({
-        id: result.id,
-        title: result.name,
-        description: result.formatted_address,
-        coordinates: {
-          latitude: result.geometry.location.lat,
-          longitude: result.geometry.location.lng
-        }
-      }));
-    });
-    if (markers.length > 0) {
-      // Updating the view
-      this.props.updateRegion(this.state.region);
-      this.props.nearbyMarkers(markers);
-    }
-  }
-
-  /**
-   * Gets the latitude and longitude of a chosen prediction.
-   * @param {string} prediction - placeid of the prediction to get latitude and longitude.
-   */
-  async getLatLong(prediction) {
-    const key = 'AIzaSyCqNODizSqMIWbKbO8Iq3VWdBcK846n_3w';
-    const geoUrl = `https://maps.googleapis.com/maps/api/place/details/json?key=${key}&placeid=${prediction}`;
-
-    try {
-      const georesult = await fetch(geoUrl);
-      const gjson = await georesult.json();
-      const locations = gjson.result.geometry.location;
-      this.setState({
-        region: {
-          latitude: locations ? locations.lat : 45.492409,
-          longitude: locations ? locations.lng : -73.582153,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05
-        }
-      });
-      this.props.updateRegion(this.state.region);
-      if (this.props.drawPath) {
-        this.props.drawPath();
-      }
-    } catch (err) {
-      console.error(err);
+      return {};
     }
   }
 
@@ -257,31 +168,48 @@ export default class searchBar extends Component {
     }
   }
 
-  start(prediction) {
-    console.log(prediction);
+  /**
+   * Gets the latitude and longitude of a chosen prediction.
+   * @param {string} prediction - placeid of the prediction to get latitude and longitude.
+   */
+  async getLatLong(prediction) {
+    const key = 'AIzaSyCqNODizSqMIWbKbO8Iq3VWdBcK846n_3w';
+    const geoUrl = `https://maps.googleapis.com/maps/api/place/details/json?key=${key}&placeid=${prediction}`;
+
+    try {
+      const georesult = await fetch(geoUrl);
+      const gjson = await georesult.json();
+      const locations = gjson.result.geometry.location;
+      this.setState({
+        region: {
+          latitude: locations ? locations.lat : 45.492409,
+          longitude: locations ? locations.lng : -73.582153,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05
+        }
+      });
+      this.props.updateRegion(this.state.region);
+    } catch (err) {
+      console.error(err);
+    }
   }
+
 
   render() {
     const placeholder = this.state.isMounted ? i18n.t('search') : 'search';
     // Predictions mapped and formmated from the current state predictions
     const predictions = this.state.predictions && this.state.predictions.length > 0 ? this.state.predictions.map((prediction) => {
-      // const getDestinationIfSet = this.props.getDestinationIfSet
-      //   ? this.props.getDestinationIfSet(prediction.description)
-      //   : () => {};
       return (
         <View key={prediction.id} style={styles.view}>
           <TouchableOpacity
             style={styles.Touch}
             onPress={() => {
               this.setState({ destination: prediction.description });
-              if (this.props.getDestinationIfSet) {
-                this.props.getDestinationIfSet(prediction.description);
+              if (this.props.setDestinationIfSelected) {
+                this.props.setDestinationIfSelected(prediction.description);
               }
               this.getLatLong(prediction.place_id);
               this.setState({ showPredictions: false });
-              if (this.props.getDestinationIfSet) {
-                this.props.getDestinationIfSet(prediction.description);
-              }
               Keyboard.dismiss();
             }}
           >
@@ -310,10 +238,9 @@ export default class searchBar extends Component {
      * sets state when search bar is cleared
      */
     const onClear = () => {
-      this.setState({ showPredictions: false });
-
       // Clear markers on the map
       if (this.props.nearbyMarkers) { this.props.nearbyMarkers([]); }
+      this.setState({ showPredictions: true });
     };
 
     /**
@@ -324,6 +251,7 @@ export default class searchBar extends Component {
       if (this.props.setCampusToggleVisibility) {
         this.props.setCampusToggleVisibility(true);
       }
+      this.setState({ showPredictions: true });
       // Clear markers on the map
       if (this.props.nearbyMarkers) { this.props.nearbyMarkers([]); }
     };
@@ -335,6 +263,7 @@ export default class searchBar extends Component {
       if (this.props.setCampusToggleVisibility) {
         this.props.setCampusToggleVisibility(false);
       }
+      this.setState({ showPredictions: false });
     };
 
     const containerStyle = {
@@ -368,7 +297,7 @@ export default class searchBar extends Component {
               padding={5}
               returnKeyType="search"
               onSubmitEditing={async () => {
-                await this.getNearbyPlaces(this.state.destination);
+                await this.props.getNearbyPlaces(this.state.destination);
                 this.setState({ showPredictions: false });
               }}
               lightTheme

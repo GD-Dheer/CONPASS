@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import buildings from '../../assets/polygons/polygons';
 import CustomPolygon from './customPolygon';
 import styles from './styles';
-import { EXTERIOR, INTERIOR, POI, BUILDING } from '../../store/constants';
+import {
+  EXTERIOR, INTERIOR, POI, BUILDING
+} from '../../store/constants';
 
 let region = '';
 
@@ -58,7 +60,7 @@ class TheMap extends Component {
     }
 
     if (prevProps.polylineVisibility !== polylineVisibility) {
-      this.setState({ polylineVisibility });
+      this.state.polylineVisibility = polylineVisibility;
     }
 
     /**
@@ -104,9 +106,7 @@ class TheMap extends Component {
     // they do not provide a callback when the fitToCoordinates is complete.
     // Setting at timer for the animation to finish
     setTimeout(() => {
-      const getRegion = region;
-      this.getBuildingInformation(building);
-      this.props.turnInteriorModeOn(building, getRegion);
+      this.props.turnInteriorModeOn();
     }, 500);
   }
 
@@ -115,8 +115,8 @@ class TheMap extends Component {
    * @param {*} POI - POI to be focused on map
    *
    */
-  focusOnPOI(POI) {
-    const { coordinates } = POI;
+  focusOnPOI(poi) {
+    const { coordinates } = poi;
     this.state.mapRef.fitToCoordinates([coordinates], {
       edgePadding: {
         top: 10, right: 20, bottom: 10, left: 20
@@ -150,7 +150,7 @@ class TheMap extends Component {
         const address = gjson.result.formatted_address;
         const { name } = gjson.result;
         const locations = gjson.result.geometry.location;
-        this.props.getDestinationIfSet(`${name}, ${address}`);
+        this.props.setDestinationIfSelected(`${name}, ${address}`);
         this.props.updateRegionCloser({
           latitude: locations ? locations.lat : 45.492409,
           longitude: locations ? locations.lng : -73.582153,
