@@ -61,6 +61,10 @@ export default class OutdoorDirections extends Component {
     this.props.getCoordinates(newCoordinates);
   };
 
+  initiateNavigation(start, end, mode) {
+    this.props.initiateNavigation(start, end, mode);
+  }
+
     /**
  * updates mode of transportation
  * @param {string} mode - Mode of transport: driving, bicycling, transit or walking
@@ -80,14 +84,17 @@ export default class OutdoorDirections extends Component {
             hideMenu={this.state.hide}
             drawPath={this.drawPath}
             currentBuildingPred={this.props.currentBuildingPred}
+            indoorRoomsList={this.props.indoorRoomsList}
           />
           <DestinationSearchBar
+            initiateNavigation = {this.initiateNavigation}
             drawPath={this.state.drawPath}
             getRegionFromSearch={this.props.getRegionFromSearch}
             getDestinationIfSet={this.props.getDestinationIfSet}
             updatedRegion={this.state.region}
             coordinateCallback={this.updateCoordinates}
             getMode={this.state.mode}
+            indoorRoomsList={this.props.indoorRoomsList}
           />
           <Car updateMode={this.updateMode} />
           <Bus

@@ -14,6 +14,9 @@ class BackButton extends Component {
   back() {
     this.props.endNavigation();
     this.props.changeVisibilityTo(false);
+    if (this.props.changePolylineVisibilityTo) {
+      this.props.changePolylineVisibilityTo(false);
+    }
   }
 
   render() {

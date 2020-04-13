@@ -4,7 +4,7 @@ import Svg, {
 } from 'react-native-svg';
 import * as React from 'react';
 
-function SvgHall8(props) {
+function SvgHall7(props) {
   return (
     <Svg width={1024} height={1024} {...props}>
       <Path fill="none" d="M-1-1h1026v1026H-1z" />
@@ -155,7 +155,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          867
+          767
         </Text>
         <Text
           stroke="#000"
@@ -165,7 +165,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          801
+          701
         </Text>
         <Text
           stroke="#000"
@@ -175,7 +175,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          803
+          703
         </Text>
         <Text
           stroke="#000"
@@ -185,7 +185,7 @@ function SvgHall8(props) {
           fontSize={20}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          805.03
+          705.03
         </Text>
         <Text
           stroke="#000"
@@ -195,7 +195,7 @@ function SvgHall8(props) {
           fontSize={16}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          805.02
+          705.02
         </Text>
         <Text
           strokeWidth={0}
@@ -204,7 +204,7 @@ function SvgHall8(props) {
           fontSize={16}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          805.01
+          705.01
         </Text>
         <Text
           stroke="#000"
@@ -214,7 +214,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          807
+          707
         </Text>
         <Text
           stroke="#000"
@@ -224,7 +224,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          811
+          711
         </Text>
         <Text
           stroke="#000"
@@ -234,7 +234,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          809.01
+          709.01
         </Text>
         <Text
           stroke="#000"
@@ -244,7 +244,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          813
+          713
         </Text>
         <Text
           stroke="#000"
@@ -254,7 +254,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          815
+          715
         </Text>
         <Text
           stroke="#000"
@@ -264,7 +264,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          817
+          717
         </Text>
         <Text
           stroke="#000"
@@ -274,7 +274,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          819
+          719
         </Text>
         <Text
           stroke="#000"
@@ -284,7 +284,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          821
+          721
         </Text>
         <Text
           stroke="#000"
@@ -294,7 +294,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          823
+          723
         </Text>
         <Text
           stroke="#000"
@@ -304,7 +304,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          825
+          725
         </Text>
         <Text
           stroke="#000"
@@ -314,7 +314,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          827
+          727
         </Text>
         <Text
           stroke="#000"
@@ -324,7 +324,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          831
+          731
         </Text>
         <Text
           stroke="#000"
@@ -334,7 +334,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          829
+          729
         </Text>
         <Text
           stroke="#000"
@@ -344,7 +344,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          833
+          733
         </Text>
         <Text
           stroke="#000"
@@ -354,7 +354,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          835
+          735
         </Text>
         <Text
           strokeWidth={0}
@@ -364,7 +364,7 @@ function SvgHall8(props) {
           fontFamily="Helvetica, Arial, sans-serif"
           stroke="#000"
         >
-          837
+          737
         </Text>
         <Text
           stroke="#000"
@@ -374,7 +374,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          841
+          741
         </Text>
         <Text
           stroke="#000"
@@ -384,7 +384,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          843
+          743
         </Text>
         <Text
           stroke="#000"
@@ -394,7 +394,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          845
+          745
         </Text>
         <Text
           stroke="#000"
@@ -404,7 +404,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          847
+          747
         </Text>
         <Text
           stroke="#000"
@@ -414,7 +414,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          849
+          749
         </Text>
         <Text
           stroke="#000"
@@ -424,7 +424,7 @@ function SvgHall8(props) {
           fontSize={20}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          851.02
+          751.02
         </Text>
         <Text
           strokeWidth={0}
@@ -433,7 +433,7 @@ function SvgHall8(props) {
           fontSize={16}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          851.03
+          751.03
         </Text>
         <Text
           strokeWidth={0}
@@ -442,7 +442,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          851.01
+          751.01
         </Text>
         <Text
           stroke="#000"
@@ -452,7 +452,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          853
+          753
         </Text>
         <Text
           stroke="#000"
@@ -462,7 +462,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          855
+          755
         </Text>
         <Text
           stroke="#000"
@@ -472,7 +472,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          857
+          757
         </Text>
         <Text
           stroke="#000"
@@ -482,7 +482,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          859
+          759
         </Text>
         <Text
           stroke="#000"
@@ -492,7 +492,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          861
+          761
         </Text>
         <Text
           stroke="#000"
@@ -502,7 +502,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          863
+          763
         </Text>
         <Text
           stroke="#000"
@@ -512,7 +512,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          865
+          765
         </Text>
         <Text
           strokeWidth={0}
@@ -521,7 +521,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          809.02
+          709.02
         </Text>
         <Text
           strokeWidth={0}
@@ -530,7 +530,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          809.03
+          709.03
         </Text>
         <Text
           stroke="#000"
@@ -540,7 +540,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          820
+          720
         </Text>
         <Image
           x={685.385}
@@ -578,7 +578,7 @@ function SvgHall8(props) {
           fontSize={20}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          886
+          786
         </Text>
         <Text
           stroke="#000"
@@ -588,7 +588,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          822
+          722
         </Text>
         <Text
           stroke="#000"
@@ -598,7 +598,7 @@ function SvgHall8(props) {
           fontSize={20}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          832.06
+          732.06
         </Text>
         <Text
           strokeWidth={0}
@@ -607,7 +607,7 @@ function SvgHall8(props) {
           fontSize={10}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          832.05
+          732.05
         </Text>
         <Text
           strokeWidth={0}
@@ -616,7 +616,7 @@ function SvgHall8(props) {
           fontSize={10}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          832.03
+          732.03
         </Text>
         <Text
           strokeWidth={0}
@@ -625,7 +625,7 @@ function SvgHall8(props) {
           fontSize={10}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          832.01
+          732.01
         </Text>
         <Text
           strokeWidth={0}
@@ -634,7 +634,7 @@ function SvgHall8(props) {
           fontSize={10}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          832.02
+          732.02
         </Text>
         <Image
           x={214.991}
@@ -651,7 +651,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          862
+          762
         </Text>
         <Text
           strokeWidth={0}
@@ -660,7 +660,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          860.04
+          760.04
         </Text>
         <Text
           strokeWidth={0}
@@ -669,7 +669,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          860.06
+          760.06
         </Text>
         <Text
           strokeWidth={0}
@@ -678,7 +678,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          860.05
+          760.05
         </Text>
         <Text
           strokeWidth={0}
@@ -687,7 +687,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          860.03
+          760.03
         </Text>
         <Text
           strokeWidth={0}
@@ -696,7 +696,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          860.01
+          760.01
         </Text>
         <Text
           stroke="#000"
@@ -706,7 +706,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          854
+          754
         </Text>
         <Text
           stroke="#000"
@@ -716,7 +716,7 @@ function SvgHall8(props) {
           fontSize={24}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          842
+          742
         </Text>
         <Text
           stroke="#000"
@@ -726,7 +726,7 @@ function SvgHall8(props) {
           fontSize={20}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          852
+          752
         </Text>
         <Text
           stroke="#000"
@@ -736,7 +736,7 @@ function SvgHall8(props) {
           fontSize={20}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          838
+          738
         </Text>
         <Text
           stroke="#000"
@@ -746,7 +746,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          838.01
+          738.01
         </Text>
         <Text
           stroke="#000"
@@ -756,7 +756,7 @@ function SvgHall8(props) {
           fontSize={20}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          881
+          781
         </Text>
         <Text
           strokeWidth={0}
@@ -765,7 +765,7 @@ function SvgHall8(props) {
           fontSize={12}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          877
+          777
         </Text>
         <Text
           stroke="#000"
@@ -775,7 +775,7 @@ function SvgHall8(props) {
           fontSize={18}
           fontFamily="Helvetica, Arial, sans-serif"
         >
-          840
+          740
         </Text>
         <Image
           x={315.299}
@@ -814,672 +814,672 @@ function SvgHall8(props) {
         />
         {/* Elements below show intermediate path nodes. Uncomment to visually debug */}
         {/* <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={622}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={712}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={800}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={825}
-          y={744}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={825}
-          y={605}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={825}
-          y={515}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={825}
-          y={426}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={825}
-          y={333}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={825}
-          y={243}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={849}
-          y={172}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={796}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={825}
-          y={466}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={706}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={620}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={605}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={437}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={382}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={260}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={183}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={334}
-          y={122}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={335}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={128}
-          y={174}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={168}
-          y={241}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={168}
-          y={324}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={168}
-          y={425}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={164}
-          y={512}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={165}
-          y={600}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={168}
-          y={694}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={462}
-          y={399}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={484}
-          y={640}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={88}
-          y={809}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={115}
-          y={809}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={168}
-          y={801}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={264}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={348}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={438}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={625}
-          y={720}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={625}
-          y={686}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={588}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-          stroke="#000"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={395}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={395}
-          y={691}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={347}
-          y={399}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={274}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={312}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={350}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={215}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={800}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={399}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={640}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={535}
-          y={687}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={622}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={712}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={800}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={825}
+            y={744}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={825}
+            y={605}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={825}
+            y={515}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={825}
+            y={426}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={825}
+            y={333}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={825}
+            y={243}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={849}
+            y={172}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={796}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={825}
+            y={466}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={706}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={620}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={605}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={437}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={382}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={260}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={183}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={334}
+            y={122}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={335}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={128}
+            y={174}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={168}
+            y={241}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={168}
+            y={324}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={168}
+            y={425}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={164}
+            y={512}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={165}
+            y={600}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={168}
+            y={694}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={462}
+            y={399}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={484}
+            y={640}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={88}
+            y={809}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={115}
+            y={809}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={168}
+            y={801}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={264}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={348}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={438}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={625}
+            y={720}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={625}
+            y={686}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={588}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+            stroke="#000"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={395}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={395}
+            y={691}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={347}
+            y={399}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={274}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={312}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={350}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={215}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={800}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={399}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={640}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={535}
+            y={687}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
 
-        <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={261}
-          y={517}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-         <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={261}
-          y={486}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-         <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={261}
-          y={448}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-         <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={261}
-          y={399}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
-         <Text
-          stroke="#000"
-          strokeWidth={0}
-          strokeOpacity="null"
-          fillOpacity="null"
-          x={409}
-          y={399}
-          fontSize={14}
-          fontFamily="Helvetica, Arial, sans-serif"
-        >
-          O
-        </Text>
+          <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={261}
+            y={517}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+           <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={261}
+            y={486}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+           <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={261}
+            y={448}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+           <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={261}
+            y={399}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
+           <Text
+            stroke="#000"
+            strokeWidth={0}
+            strokeOpacity="null"
+            fillOpacity="null"
+            x={409}
+            y={399}
+            fontSize={14}
+            fontFamily="Helvetica, Arial, sans-serif"
+          >
+            O
+          </Text>
 
 
-        */}
+          */}
       </G>
     </Svg>
   );
 }
 
-export default SvgHall8;
+export default SvgHall7;

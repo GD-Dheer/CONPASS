@@ -64,8 +64,11 @@ export default class DestinationSearchBar extends Component {
     try {
       const result = await fetch(apiUrl);
       const json = await result.json();
+
+      const allPredictions = this.generateAllContextualPredictions(destination.toLowerCase(), json.predictions);
+
       this.setState({
-        predictions: json.predictions
+        predictions: allPredictions
       });
     } catch (err) {
       console.error(err);
@@ -101,7 +104,56 @@ export default class DestinationSearchBar extends Component {
     this.drawPath();
   }
 
-  // this should not be there
+  /**
+   * Sets indoor destination for directions between points in same building
+   */
+  setIndoorDestination = (destination) => {
+    // if the prediction is an indoor destination in the same current building, we do not need to
+    // set lat long region
+    const roomName = destination.description.toLowerCase();
+    if ((roomName.startsWith('h-') && this.props.currentBuildingName === 'H')
+     || (roomName.startsWith('vl-') && this.props.currentBuildingName === 'VL')) {
+      this.props.dijkstraHandler(destination.dijkstraId, destination.floor);
+    }
+  }
+
+  /**
+   * Concatenates custom indoor predictions with predictions from Google API
+   * @param {string} - destination entered by user in search bar
+   * @param {string} - googleApiPredictions
+   */
+  generateAllContextualPredictions(destination, googleApiPredictions) {
+    if (destination.length === 0) {
+      return [];
+    }
+
+    const { indoorRoomsList } = this.props;
+    const MAX_NUM_PREDICTIONS = 5;
+    // contextual predictions based on user query
+    const predictions = indoorRoomsList.filter((room) => {
+      const roomData = room.description ? room.description.toUpperCase() : ''.toUpperCase();
+      const textData = destination.toUpperCase();
+      return roomData.indexOf(textData) > -1;
+    });
+
+    // if H- or VL- prefix entered by user only show relevant indoor predictions
+    if (destination.startsWith('h-') || destination.startsWith('vl-')) {
+      return predictions.slice(0, MAX_NUM_PREDICTIONS);
+    }
+
+    if (predictions.length === 0) {
+      return googleApiPredictions;
+    }
+
+    // return mix of both google and relevant indoor predictions
+    const googlePredictions = googleApiPredictions.slice(0, 2);
+    const indoorPredictions = predictions.slice(0, 3);
+    const mixedPredictions = indoorPredictions.concat(googlePredictions);
+
+    return mixedPredictions;
+  }
+
+
   async drawPath() {
     try {
       await this.getCurrentLocation();
@@ -135,17 +187,23 @@ export default class DestinationSearchBar extends Component {
     }
   }
 
+  selectPrediction(prediction) {
+    this.setState({ destination: prediction.description });
+    this.getLatLong(prediction.place_id);
+    this.setIndoorDestination(prediction);
+    this.setState({ showPredictions: false });
+    console.log(prediction);
+  }
+
   render() {
     const placeholder = this.state.isMounted ? i18n.t('destinationSearch') : 'Choose your destination';
-    const predictions = this.state.predictions.map((prediction) => {
+    const predictions = this.state.predictions ? this.state.predictions.map((prediction) => {
       return (
         <View key={prediction.id} style={styles.view}>
           <TouchableOpacity
             style={styles.Touch}
             onPress={() => {
-              this.setState({ destination: prediction.description });
-              this.getLatLong(prediction.place_id);
-              this.setState({ showPredictions: false });
+              this.selectPrediction(prediction);
               Keyboard.dismiss();
             }}
           >
@@ -153,7 +211,26 @@ export default class DestinationSearchBar extends Component {
           </TouchableOpacity>
         </View>
       );
-    });
+    }) : null;
+
+    /**
+     * Controller function for searchBar component
+     * sets state when search bar is cleared
+     */
+    const onClear = () => {
+      this.setState({
+        showPredictions: false,
+      });
+    };
+
+    /**
+     * Controller function for searchBar component
+     */
+    const onBlur = () => {
+      this.setState({
+        showPredictions: false,
+      });
+    };
 
     return (
       <View style={styles.container}>
@@ -173,14 +250,13 @@ export default class DestinationSearchBar extends Component {
               return this.onChangeDestination(destination);
             }}
             value={this.state.destination}
-            onClear={() => {
-              this.setState({ showPredictions: true });
-            }}
+            onClear={onClear}
+            onBlur={onBlur}
             blurOnSubmit
           />
         </View>
         {
-          this.state.showPredictions
+          this.state.showPredictions && predictions
             ? predictions : null
         }
       </View>
