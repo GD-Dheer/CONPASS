@@ -77,6 +77,7 @@ export default class LoginScreen extends Component {
           const jsonFile = await userInfoResponse.json();
           const stringFile = JSON.stringify(jsonFile);
           AsyncStorage.setItem(`events${calendarCount}`, stringFile);
+          userCalendarsGeneralInfo.storageId =`events${calendarCount}`;
           calendarCount++;
         }
         /*const userInfoResponse = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events?key=AIzaSyBAHObp5Ic3CbJpkX2500tNhf53e_3wBMA&timeMin=2020-01-01T01:00:00.000Z', {
@@ -104,7 +105,8 @@ export default class LoginScreen extends Component {
       userCalendarsGeneralInfo.push({
           id:calendar.id,
           summary:calendar.summary,
-          backgroundColor:calendar.backgroundColor
+          backgroundColor:calendar.backgroundColor,
+          storageId,
         });
     });
     //console.log(userCalendarsGeneralInfo);
