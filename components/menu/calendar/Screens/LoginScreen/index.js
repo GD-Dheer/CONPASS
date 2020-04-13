@@ -62,6 +62,10 @@ export default class LoginScreen extends Component {
         
 
         const userCalendarsGeneralInfo = await this.getUserCalendars(accessToken);
+        const stringUserCalendarsGeneralInfo =  JSON.stringify(userCalendarsGeneralInfo);
+        console.log('-ccc-> ',stringUserCalendarsGeneralInfo);
+        AsyncStorage.setItem('stringUserCalendarsGeneralInfo', stringUserCalendarsGeneralInfo);
+
         let calendarCount = 1;
         //console.log('-->',userCalendarsGeneralInfo);
 
