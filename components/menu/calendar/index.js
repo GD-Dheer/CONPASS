@@ -6,6 +6,7 @@ import LoginScreen from './Screens/LoginScreen';
 import LoadingScreen from './Screens/LoadingScreen';
 import DashboardScreen from './Screens/DashboardScreen';
 import FetchScreen from './Screens/FetchScreen';
+import CalendarsScreen from './Screens/CalendarsScreen';
 import HomeScreen from '../../home';
 
 
@@ -20,6 +21,7 @@ const AppSwitchNavigator = createSwitchNavigator({
   LoadingScreen,
   LoginScreen,
   DashboardScreen,
+  CalendarsScreen,
   FetchScreen,
   HomeScreen
 });

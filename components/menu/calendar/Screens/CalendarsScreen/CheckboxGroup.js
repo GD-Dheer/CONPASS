@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View,FlatList, ScrollView, AsyncStorage, Text,TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { Checkbox,ListItem } from 'react-native-elements'
+import { Checkbox,ListItem } from 'react-native-elements';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 export default class CheckboxGroup extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state={

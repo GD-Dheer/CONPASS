@@ -77,7 +77,7 @@ export default class LoginScreen extends Component {
           calendarCount += 1;
         });
         console.log('last Check inshala: ',userCalendarsInfo);
-        this.props.navigation.navigate('FetchScreen', {userCalendarsInfo});
+        this.props.navigation.navigate('CalendarsScreen', { userCalendarsInfo });
         return result.accessToken;
       }
       return { cancelled: true };
