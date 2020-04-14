@@ -9,7 +9,11 @@ export default class PathPolyline extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => { this.props.changeVisibilityTo(true); }}>
+        <TouchableOpacity onPress={() => {
+          this.props.changeVisibilityTo(true);
+          this.props.nearbyMarkers([]);
+        }}
+        >
           <Image style={styles.directions} source={directions} />
         </TouchableOpacity>
       </View>

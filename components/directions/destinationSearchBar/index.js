@@ -15,7 +15,7 @@ class DestinationSearchBar extends Component {
     this.state = {
       isMounted: false,
       showPredictions: true,
-      destination: this.props.setDestinationIfSelected,
+      destination: this.props.getDestinationIfSelected,
       predictions: [],
     };
   }
@@ -26,7 +26,7 @@ class DestinationSearchBar extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.drawPath !== this.props.drawPath || prevProps.getMode !== this.props.getMode) {
-      this.drawPath();
+      this.props.drawPath();
     }
   }
 

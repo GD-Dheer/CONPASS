@@ -190,6 +190,13 @@ export default class OutdoorMapSearchBar extends Component {
       this.setState({ showPredictions: false });
     };
 
+    /**
+     * Controller function for searchBar component
+     */
+    const onClear = () => {
+      this.setState({ showPredictions: true });
+    };
+
     const containerStyle = {
       borderRadius: 10,
       borderWidth: 1,
@@ -211,6 +218,7 @@ export default class OutdoorMapSearchBar extends Component {
             value={this.state.originDescription}
             style={styles.SearchBar}
             onBlur={onBlur}
+            onClear={onClear}
             blurOnSubmit
           />
         </View>

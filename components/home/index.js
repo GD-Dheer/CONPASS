@@ -45,7 +45,7 @@ class Home extends Component {
     this.turnInteriorModeOff = this.turnInteriorModeOff.bind(this);
     this.setBuildingInfoModalVisibilityTo = this.setBuildingInfoModalVisibilityTo.bind(this);
     this.updateRegion = this.updateRegion.bind(this);
-    // this.initiateNavigation = this.initiateNavigation.bind(this);
+    this.getNearbyPlaces = this.getNearbyPlaces.bind(this);
   }
 
   componentDidMount() {
@@ -322,7 +322,7 @@ class Home extends Component {
    */
   turnInteriorModeOn() {
     this.setState({
-      // region,
+      nearbyMarkers: [],
       interiorMode: true,
     });
   }
@@ -357,7 +357,6 @@ class Home extends Component {
           setDestinationIfSelected={this.setDestinationIfSelected}
           navigation={this.props.navigation}
           updateRegion={this.updateRegion}
-          changeVisibilityTo={this.changeVisibilityTo}
           setCampusToggleVisibility={this.setCampusToggleVisibility}
           currentBuildingPred={this.state.currentBuildingAddress}
           nearbyMarkers={this.getNearbyMarkers}
@@ -377,6 +376,7 @@ class Home extends Component {
         />
         <PathPolyline
           changeVisibilityTo={this.changeVisibilityTo}
+          nearbyMarkers={this.getNearbyMarkers}
         />
         {this.state.showDirectionsMenu && (
           <OutdoorDirections

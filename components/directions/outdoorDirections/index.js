@@ -139,8 +139,12 @@ class OutdoorDirections extends Component {
       const urLatitude = location.coords.latitude;
       const urLongitude = location.coords.longitude;
       const key = 'AIzaSyBsMjuj6q76Vcna8G5z9PDyTH2z16fNPDk';
-      const originLat = this.props.updatedRegion.latitude === 0 ? urLatitude : this.props.updatedRegion.latitude;
-      const originLong = this.props.updatedRegion.longitude === 0 ? urLongitude : this.props.updatedRegion.longitude;
+      const originLat = this.state.destinationRegion.latitude === 0
+        ? urLatitude
+        : this.state.destinationRegion.latitude;
+      const originLong = this.state.destinationRegion.longitude === 0
+        ? urLongitude
+        : this.state.destinationRegion.longitude;
       const destinationLat = this.state.destinationRegion.latitude;
       const destinationLong = this.state.destinationRegion.longitude;
       const mode = this.props.getMode;
@@ -158,7 +162,7 @@ class OutdoorDirections extends Component {
             longitude: point.lng
           };
         });
-        this.props.coordinateCallback(waypoints);
+        this.updateCoordinates(waypoints);
       }
     } catch (err) {
       console.error(err);
@@ -192,17 +196,13 @@ class OutdoorDirections extends Component {
           indoorRoomsList={this.props.indoorRoomsList}
           getOriginLatLong={this.getOriginLatLong}
         />
-        {/* <DestinationSearchBar
-          initiateNavigation={this.initiateNavigation}
-          drawPath={this.state.drawPath}
-          getRegionFromSearch={this.props.getRegionFromSearch}
-          getDestinationIfSet={this.props.getDestinationIfSet}
-          updatedRegion={this.state.region}
-          coordinateCallback={this.updateCoordinates}
+        <DestinationSearchBar
+          drawPath={this.drawPath}
+          getDestinationIfSelected={this.props.getDestinationIfSelected}
           getMode={this.state.mode}
           indoorRoomsList={this.props.indoorRoomsList}
-             getOriginDestinationLatLong={this.getDestinationLatLong}
-        /> */}
+          getDestinationLatLong={this.getDestinationLatLong}
+        />
         <Car updateMode={this.updateMode} />
         <Bus
           navigation={this.props.navigation}

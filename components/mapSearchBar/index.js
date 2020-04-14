@@ -99,6 +99,33 @@ export default class searchBar extends Component {
     }
   }
 
+
+  /**
+   * Gets the latitude and longitude of a chosen prediction.
+   * @param {string} prediction - placeid of the prediction to get latitude and longitude.
+   */
+  async getLatLong(prediction) {
+    const key = 'AIzaSyCqNODizSqMIWbKbO8Iq3VWdBcK846n_3w';
+    const geoUrl = `https://maps.googleapis.com/maps/api/place/details/json?key=${key}&placeid=${prediction}`;
+
+    try {
+      const georesult = await fetch(geoUrl);
+      const gjson = await georesult.json();
+      const locations = gjson.result.geometry.location;
+      this.setState({
+        region: {
+          latitude: locations ? locations.lat : 45.492409,
+          longitude: locations ? locations.lng : -73.582153,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05
+        }
+      });
+      this.props.updateRegion(this.state.region);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   /**
    * Concatenates custom indoor predictions with predictions from Google API
    * @param {string} - destination entered by user in search bar
@@ -167,33 +194,6 @@ export default class searchBar extends Component {
       return null;
     }
   }
-
-  /**
-   * Gets the latitude and longitude of a chosen prediction.
-   * @param {string} prediction - placeid of the prediction to get latitude and longitude.
-   */
-  async getLatLong(prediction) {
-    const key = 'AIzaSyCqNODizSqMIWbKbO8Iq3VWdBcK846n_3w';
-    const geoUrl = `https://maps.googleapis.com/maps/api/place/details/json?key=${key}&placeid=${prediction}`;
-
-    try {
-      const georesult = await fetch(geoUrl);
-      const gjson = await georesult.json();
-      const locations = gjson.result.geometry.location;
-      this.setState({
-        region: {
-          latitude: locations ? locations.lat : 45.492409,
-          longitude: locations ? locations.lng : -73.582153,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05
-        }
-      });
-      this.props.updateRegion(this.state.region);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
 
   render() {
     const placeholder = this.state.isMounted ? i18n.t('search') : 'search';
@@ -266,6 +266,14 @@ export default class searchBar extends Component {
       this.setState({ showPredictions: false });
     };
 
+    const onSubmit = async () => {
+      if (this.props.getNearbyPlaces) {
+        await this.props.getNearbyPlaces(this.state.destination);
+      }
+
+      this.setState({ showPredictions: false });
+    };
+
     const containerStyle = {
       borderRadius: 10,
       borderWidth: 1,
@@ -296,10 +304,7 @@ export default class searchBar extends Component {
               autoCorrect={false}
               padding={5}
               returnKeyType="search"
-              onSubmitEditing={async () => {
-                await this.props.getNearbyPlaces(this.state.destination);
-                this.setState({ showPredictions: false });
-              }}
+              onSubmitEditing={onSubmit}
               lightTheme
               containerStyle={containerStyle}
               searchIcon={!this.props.hideMenu && searchIcon}
