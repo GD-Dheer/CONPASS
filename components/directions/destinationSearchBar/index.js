@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import {

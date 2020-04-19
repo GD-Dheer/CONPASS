@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 /* eslint-disable no-alert */
 import {
   YellowBox,
@@ -61,10 +62,10 @@ export default class DashboardScreen extends Component {
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     if (status !== 'granted') {
       Alert.alert(i18n.t('permissionNotGranted'),
-    i18n.t('allowNotifications'),
-    [
-      { text: 'ok' }
-    ]);
+        i18n.t('allowNotifications'),
+        [
+          { text: 'ok' }
+        ]);
     }
   }
 

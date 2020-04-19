@@ -133,6 +133,7 @@ it('Should change state', () => {
     .getInstance();
   dashboardScreenComponent._isMounted = true;
   dashboardScreenComponent.sendInput(2);
+  dashboardScreenComponent.sendDirections('test');
   const bool = dashboardScreenComponent.state.timeToNotify === 2;
   expect(bool).toBe(true);
 });
